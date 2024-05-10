@@ -8,3 +8,4 @@
 3. Uses cloud Data
      - Buzzes a melody when there is a lightning alert, uses humidity to predict rain, and potentain difference to see if lightning is gonna strike
      - If lightning is detecrted, output 'Lightning incoming! Seek Shelther now!'
+     - LCD also displays date & time 
