@@ -1,5 +1,5 @@
 # Light Show []
-`The system will likely use a video setup instead of static photos. Allows to capture moving vehicles, i.e. Emergency vehicles & Buses`
+	The system will likely use a video setup instead of static photos. Allows to capture moving vehicles, i.e. Emergency vehicles & Buses
 1. Better Lights Inc.
      - For incoming vehicles (emergency vehicles, buses) will force it so that the traffic lights passes them, & also determines how close to the traffic light
 2. Old Face Reg.
