@@ -18,4 +18,4 @@
 - **Naming**: use CAMEL format; new type -> newType 
 - **Error Correction**: Use a function for error correction, there is a error correction for each type; *int, float, bool, str*
 - **Comments**: ***REMEMBER TO COMMENT WHAT EACH GROUP OF CODE DOES***
-- Data Files: Use csv files for the data; a function can be used to read & write the files
+- **Data Files**: Use csv files for the data; a function can be used to read & write the files
