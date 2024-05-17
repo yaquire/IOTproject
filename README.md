@@ -1,3 +1,4 @@
+https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content=DAGFNaMvKn4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 # Polaris [Yaqube & Jun Yu]
 	The system will likely use a video setup instead of static photos. Allows to capture moving vehicles, i.e. Emergency vehicles & Buses
 1. **Better Lights Inc.**
