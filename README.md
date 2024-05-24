@@ -14,6 +14,26 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 	- Using the images that the camera sees, it will tabulate the amount of vehicles on the road & add them to a data base
 	- Allows for tracking of roadways, at certain points of time, also allows for there to be better calibration between traffic lights
 	- It then uploads the data into the cloud to be stored, can have like local backup if needed
+
+## New Idea
+1. RFID
+   - for card payment
+3. Fingerprint
+   -clock in clock out
+5. Telegram
+   - purchasing/ordering
+7. Thingspeak
+   - Stores the data
+9. Voice Play Back
+    - suscess using RFID
+11. Buzzer
+    - Indicate now order
+13. LED
+    - Indicate new order
+15. LCD
+    - user order data
+17. Keypad
+    - input discont code/ override clock in 
 ---
 ## Code Writing Format
 - **Naming**: use CAMEL format; new type -> newType 
