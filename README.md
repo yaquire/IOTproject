@@ -17,11 +17,9 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 
 ## New Idea
 1. RFID
-   - for card payment
-3. Fingerprint
+   - staff clockin and clock out/staff discount
+2. Fingerprint
    -clock in clock out
-5. Telegram
-   - purchasing/ordering
 7. Thingspeak
    - Stores the data
 9. Voice Play Back
@@ -33,7 +31,13 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 15. LCD
     - user order data
 17. Keypad
-    - input discont code/ override clock in 
+    - input discont code/ override clock in
+18. Ultrasound
+    - detect people leaving the store
+19. IFR
+    - detect people near cashier as customers
+20. web server
+    - purchasing/preordering
 ---
 ## Code Writing Format
 - **Naming**: use CAMEL format; new type -> newType 
