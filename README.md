@@ -1,5 +1,5 @@
 https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content=DAGFNaMvKn4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
-# Polaris [Yaqube & Jun Yu]
+# Polaris [Yaqube & Jun Yu] (THIS HAS BEEN SCRAPED)
 	The system will likely use a video setup instead of static photos. Allows to capture moving vehicles, i.e. Emergency vehicles & Buses
 1. **Better Lights Inc.**
      - For incoming vehicles (emergency vehicles, buses) will force it so that the traffic lights passes them, & also determines how close to the traffic light
@@ -15,28 +15,30 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 	- Allows for tracking of roadways, at certain points of time, also allows for there to be better calibration between traffic lights
 	- It then uploads the data into the cloud to be stored, can have like local backup if needed
 
-## New Idea
+## New Idea [Yaqube & Jun Yu]
+| Ideas | Detail |
+
 1. RFID
    - staff clockin and clock out/staff discount
 2. Fingerprint
-   -clock in clock out
-7. Thingspeak
+   - clock in clock out
+3. Thingspeak
    - Stores the data
-9. Voice Play Back
+4. Voice Play Back
     - suscess using RFID
-11. Buzzer
+5. Buzzer
     - Indicate now order
-13. LED
+6. LED
     - Indicate new order
-15. LCD
+7. LCD
     - user order data
-17. Keypad
+8. Keypad
     - input discont code/ override clock in
-18. Ultrasound
+9. Ultrasound
     - detect people leaving the store
-19. IFR
+10. IFR
     - detect people near cashier as customers
-20. web server
+11. web server
     - purchasing/preordering
 ---
 ## Code Writing Format
