@@ -16,35 +16,17 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 	- It then uploads the data into the cloud to be stored, can have like local backup if needed
 
 ## New Idea [Yaqube & Jun Yu]
-| Ideas | Detail |
 
-| asdasd | asdasd |
-| ------ | ------ |
-| asdasd | asdasd |
+| Idea               | Detail                                                                                       |
+| ------------------ | -------------------------------------------------------------------------------------------- |
+| *RFID*             | used for discount cards for customers                                                        |
+| *Thingspeak*       | Used to store the data; QR codes of the items, items purchased, estimated stock in the store |
+| *Playback/Speaker* | Used to indicate the status of the purchase                                                  |
+| *LCD*              | Show errors & QR code for paynow                                                             |
+| *Keypad*           | Add discount code manually or add item number                                                |
+| *Ultrasound*       | Used to estimate the number of people who have entered the store                             |
+| *Web Server*       | Allow online access to the store, see the stock available                                    |
 
-
-1. RFID
-   - staff clockin and clock out/staff discount
-2. Fingerprint
-   - clock in clock out
-3. Thingspeak
-   - Stores the data
-4. Voice Play Back
-    - suscess using RFID
-5. Buzzer
-    - Indicate now order
-6. LED
-    - Indicate new order
-7. LCD
-    - user order data
-8. Keypad
-    - input discont code/ override clock in
-9. Ultrasound
-    - detect people leaving the store
-10. IFR
-    - detect people near cashier as customers
-11. web server
-    - purchasing/preordering
 ---
 ## Code Writing Format
 - **Naming**: use CAMEL format; new type -> newType 
