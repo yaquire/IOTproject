@@ -18,6 +18,11 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 ## New Idea [Yaqube & Jun Yu]
 | Ideas | Detail |
 
+| asdasd | asdasd |
+| ------ | ------ |
+| asdasd | asdasd |
+
+
 1. RFID
    - staff clockin and clock out/staff discount
 2. Fingerprint
