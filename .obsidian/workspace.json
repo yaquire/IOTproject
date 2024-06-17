@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "3bbc622712a7e6e6",
+        "id": "ebd4db9d82cde1e3",
         "type": "tabs",
         "children": [
           {
-            "id": "4ab533c64c05193f",
+            "id": "47734f39882de8d3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "yaqScript.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "2df9ea4c53726483",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "yaqScript.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "yaqScript.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "yaqScript.md"
               }
             }
           }
@@ -146,6 +147,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4ab533c64c05193f",
-  "lastOpenFiles": []
+  "active": "47734f39882de8d3",
+  "lastOpenFiles": [
+    "Script.md",
+    "yaqScript.md",
+    "static/Script.md",
+    "static/Script 1.md"
+  ]
 }
