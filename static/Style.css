@@ -14,3 +14,10 @@ body{
     text-align: center;
 
 }
+
+
+.main-button {
+    background-color: black;
+    border: none;
+    color: lightgreen;
+    text-align: center;

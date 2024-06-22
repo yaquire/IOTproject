@@ -1,6 +1,5 @@
 ## Slide 1: Title
 - Reason for name: John Doe is the name given to people with unknown identities
-
 ## Slide 5: Problems Faced
  So, we have found 3 problems faced by these individuals; losing customers due to slow service, stressed & fatigue from operating the shop, unable to track business statistics. Their stress & fatigue is due to them being the only ones running the store for long periods of time. This is leads to them likely being slow to service customers. This fatigue is also likely to make it difficult to handle the business analytics of the store. This problems are more common in stores which operate with only 1 person, regardless of the type of product sold. 
 

@@ -7,7 +7,7 @@ def index():
 
 @app.route('/np')
 def np():
-    return render_template("productNew.html")
+    return render_template("productDatabase.html")
 
 if __name__=="__main__":
     app.run(debug=True,host='0.0.0.0')
