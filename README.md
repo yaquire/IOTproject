@@ -1,5 +1,6 @@
 https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content=DAGFNaMvKn4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
-![Untitled Diagrasm drawio](https://github.com/yaquire/IOTproject/assets/136306256/d5808030-eef9-4ad1-9c03-fd22430809fc)
+![Gannt](https://github.com/yaquire/IOTproject/assets/136306256/c9b63d19-ab84-438e-a757-37a9bf56179b)
+
 ## Tasks
 #### Set up cloud (JY)
 - [ ]   Create the Thingspeak account
