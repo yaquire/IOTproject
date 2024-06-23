@@ -3,12 +3,12 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 
 ## Tasks
 #### Set up cloud (JY)
-- [ ]   Create the Thingspeak account
-- [ ] Create the channels for the data (sales & people that come into the store)
+- [x]   Create the Thingspeak account
+- [x] Create the channels for the data (sales & people that come into the store)
 #### Code the Website (Yaq)
-- [ ] Create the folders & files for the Website (static, template, python)
-- [ ] Create the main landing page of the Website 
-- [ ] Create the page for the database of items in the site
+- [x] Create the folders & files for the Website (static, template, python)
+- [x] Create the main landing page of the Website 
+- [x] Create the page for the database of items in the site
 - [ ] Allow for the page to be updated using info from the Thingspeak channel
 #### Code Inside Tracker 
 - [ ] Create the first files 
