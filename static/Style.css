@@ -16,6 +16,16 @@ body{
 }
 
 
+img {
+    background-color: white;
+}
+
+table tr th {
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+
 .main-button {
     background-color: black;
     border: none;
