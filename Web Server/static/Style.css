@@ -1,3 +1,4 @@
+
 :root {
   --beige-color: #f0ece2;
   --light_gray-color: #dfd3c3;
@@ -62,3 +63,28 @@ td {
   text-align: center;
 
 }
+
+h1{
+    color: darkcyan;
+}
+body{
+    background: lightblue;
+    color: black;
+}
+.box{
+    
+    width: 500px;
+    border: 1px solid black;
+    padding: 50px 0;
+    margin: 20px;
+    text-align: center;
+
+}
+
+
+.main-button {
+    background-color: black;
+    border: none;
+    color: lightgreen;
+    text-align: center;
+
