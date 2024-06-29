@@ -1,3 +1,69 @@
+
+:root {
+  --beige-color: #f0ece2;
+  --light_gray-color: #dfd3c3;
+  --brown-color: #c7b198;
+  --turquise-color: #596e79;
+}
+
+
+h1 {
+  color: darkcyan;
+}
+
+body {
+  background: var(--light_gray-color);
+  color: black;
+}
+
+.box {
+
+  width: 500px;
+  border: 1px solid black;
+  padding: 50px 0;
+  margin: 20px;
+  text-align: center;
+
+}
+
+
+img {
+  background-color: white;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+th,
+td {
+  padding: 10px;
+}
+
+
+
+.main-button {
+  background-color: black;
+  border: none;
+  color: lightgreen;
+  text-align: center;
+
+}
+
 h1{
     color: darkcyan;
 }
@@ -21,3 +87,4 @@ body{
     border: none;
     color: lightgreen;
     text-align: center;
+
