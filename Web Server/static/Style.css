@@ -35,7 +35,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 200px;
 }
 
 table {
@@ -87,4 +87,4 @@ body{
     border: none;
     color: lightgreen;
     text-align: center;
-
+}
