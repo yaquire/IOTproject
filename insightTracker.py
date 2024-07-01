@@ -13,68 +13,53 @@ YELLOW = "\033[93m"
 RESET = "\033[0m"
 
 
-# this this where the CHANNEL ID comes from
-def doingChannelID():
-    while True:
-        # need to check how long the ID is
-        input1 = input("Please Enter the channelID, No:")
-        input2 = input("Please Enter the channelID, No Again:")
-
-        if input1 != input2:
-            print(
-                RED
-                + "They do not match \n"
-                + YELLOW
-                + "!Please Enter the channel ID again!"
-                + RESET
-            )
-        else:
-            break
-    channelID = input1
-    return channelID
-
-
 # This piece of code runs @ the start when the API key has not been added
-def gettingAPIkeyFromUser():
-    # This loops to make sure that the person puts in the correct key
-    while True:
-        intake1 = input("Please enter in your API key:")
-        intake2 = input("Please enter in your API key again:")
+# Here the item is the the same as the item from the chunk of code below
+def gettingItemFromUser(item):
+    # filePath = f"{item}.csv"
 
+    # This loops to make sure that the person puts in the correct key
+    # This is simple error correction & might be developed further but I'll see
+
+    while True:
+        intake1 = input(f"Please enter in your {item}:")
+        intake2 = input(f"Please enter in your {item} again:")
+        # This  is an error message made with colors to make it more obvious
         if intake1 != intake2:
             print(
                 RED
                 + "They do not match \n"
                 + YELLOW
-                + "!Please Enter the API key again!"
+                + f"!Please Enter the {item} key again!"
                 + RESET
             )
         else:
-            APIkey = intake1
+            itemName = intake1
             break
 
-    return APIkey
+    return itemName
+    # This is returned back to the function below
 
 
 # This piece of code checks for an API key, if they don exist another code will be run
-def checkAPIkey():
+def checkItem(item):
     # ChatGPT told me to do this part
     # This check for the existance of the APIkey which is in a seperate CSV file
-    if os.path.exists("APIkey.csv"):
-        with open("APIkey.csv", "r") as file:
-            APIkey = file.readline()
+    filePath = f"{item}.csv"
+    if os.path.exists(filePath):
+        with open(filePath, "r") as file:
+            itemSubstance = file.readline()
             file.close()
 
     # This creates a new file for the API key
     else:
-        getAPIkey = gettingAPIkeyFromUser()
-        APIkey = getAPIkey
-        print("ad" + APIkey)
-        with open("APIkey.csv", "w") as file:
-            writingAPIkey = file.writelines(APIkey)
+        itemFromUser = gettingItemFromUser(item)
+        itemSubstance = itemFromUser
+        # print("ad" + APIkey)
+        with open(filePath, "w") as file:
+            writingFile = file.writelines(itemSubstance)
         file.close()
-    print(APIkey)
-    return APIkey
+    return itemSubstance
 
 
 def getFromCloud(APIkey):
@@ -83,7 +68,12 @@ def getFromCloud(APIkey):
 
 
 def main():
-    writeAPIkey = checkAPIkey()
+    APIkey = "APIkey"
+    ChannelID = "ChannelID"
+    writeAPIkey = checkItem(APIkey)
+    actualChannelID = checkItem(ChannelID)
+
+    print(actualChannelID)
     print(writeAPIkey)
     # infoFromCloud = getFromCloud(APIkey)
 
