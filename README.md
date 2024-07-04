@@ -1,4 +1,4 @@
-https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content=DAGFNaMvKn4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
 ![Gannt](https://github.com/yaquire/IOTproject/assets/136306256/c9b63d19-ab84-438e-a757-37a9bf56179b)
 
 ## Tasks
@@ -6,6 +6,7 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 - [x]   Create the Thingspeak account
 - [x] Create the channels for the data (sales & people that come into the store)
 #### Code the Website (Yaq)
+![Drawing](https://github.com/yaquire/IOTproject/assets/136306256/1f7d50aa-3128-47ef-8c0f-f5ec9888b690)
 - [x] Create the folders & files for the Website (static, template, python)
 - [x] Create the main landing page of the Website 
 - [x] Create the page for the database of items in the site
@@ -52,3 +53,6 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 - **Error Correction**: Use a function for error correction, there is a error correction for each type; *int, float, bool, str*
 - **Comments**: ***REMEMBER TO COMMENT WHAT EACH GROUP OF CODE DOES***
 - **Data Files**: Use csv files for the data; a function can be used to read & write the files
+
+----
+https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content=DAGFNaMvKn4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
