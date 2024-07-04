@@ -1,13 +1,23 @@
 from flask import Flask
 from flask import render_template
-app =Flask(__name__)
-@app.route('/')
+
+app = Flask(__name__)
+
+
+@app.route("/")
 def index():
     return render_template("main.html")
 
-@app.route('/np')
+
+@app.route("/np")
 def np():
     return render_template("productDatabase.html")
 
-if __name__=="__main__":
-    app.run(debug=True,host='0.0.0.0')
+
+@app.route("/filter")
+def filter():
+    return render_template("filteredPage.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
