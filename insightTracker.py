@@ -3,7 +3,7 @@ import time
 import requests
 import os
 import json
-
+import csv
 
 # ChatGPT gave me the values for this color parts & told me how to add colour
 RED = "\033[91m"
@@ -48,7 +48,7 @@ def checkItem(item):
     filePath = f"{item}.csv"
     if os.path.exists(filePath):
         with open(filePath, "r") as file:
-            itemSubstance = file.readline()
+            itemSubstance = file.readlines()
             file.close()
 
     # This creates a new file for the API key
@@ -65,16 +65,57 @@ def checkItem(item):
 def getFromCloud(APIkey):
     resp = requests.get(APIkey)
     resultsFromCloud = json.loads(resp.text)
+    
+def write_to_thingspeak(api_key, channel_id, data):
 
+    formatedData = []
+    needsToReplace = f'\n'
+    for i in data:
+        line = i.replace(needsToReplace,'')
+        formatedData.append(line)
+    print(formatedData)
+    # Removes the \n behind each string
+    processed_data = [row.split(',') for row in formatedData]
+    # Splits each string into list of fields
+    url = f"https://api.thingspeak.com/update?"
+    for index,row in enumerate(processed_data):
+        if index == 0 and not row[0].isdigit():
+            print("Skipping header row.")
+            continue 
+        # Assuming your data rows contain fields that map directly to ThingSpeak fields
+        payload = {
+            "field1": row[1],
+            "field2": row[2],
+            "field3": row[3],
+            "api_key": api_key
+            # Add more fields as needed
+        }
+        response = requests.post(url, data=payload)
+        if response.status_code == 200:
+            print(GREEN + "Data written to ThingSpeak successfully." + RESET)
+        else:
+            print(RED + f"Failed to write data to ThingSpeak: {response.text}" + RESET)
+            print('Response code:', response.status_code)
+        
+        # Add a delay to comply with ThingSpeak's rate limit (15 seconds per update)
+        import time
+        time.sleep(15)  # 15-second delay to meet rate limits
 
 def main():
     APIkey = "APIkey"
     ChannelID = "ChannelID"
+    test = "test"
     writeAPIkey = checkItem(APIkey)
     actualChannelID = checkItem(ChannelID)
+    # Read the CSV file
+    csv_data = checkItem(test)
+    print (csv_data)
+    if csv_data:
 
-    print(actualChannelID)
-    print(writeAPIkey)
+        write_to_thingspeak(writeAPIkey, actualChannelID, csv_data)
+
+    #print(actualChannelID)
+    #print(writeAPIkey)
     # infoFromCloud = getFromCloud(APIkey)
 
 
