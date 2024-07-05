@@ -14,6 +14,16 @@ def np():
     return render_template("productDatabase.html")
 
 
+@app.route("/cart")
+def cart():
+    return render_template("cartPage.html")
+
+
+@app.route("/template")
+def template():
+    return render_template("template.html")
+
+
 @app.route("/filter")
 def filter():
     return render_template("filteredPage.html")
