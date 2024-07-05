@@ -12,7 +12,7 @@ https://www.canva.com/design/DAGFNaMvKn4/P_g8dsA2eISCfiNJrH0dXw/edit?utm_content
 - [ ] Allow for the page to be updated using info from the Thingspeak channel
 #### Code Inside Tracker 
 - [x] Create the first files 
-- [ ] Create the parts that allow for data to be taken in from the Thingspeak channel
+- [x] Create the parts that allow for data to be taken in from the Thingspeak channel
 - [ ] Create the input for the Ultrasound
 - [ ] Create the formulas & code for the insight 
 - [ ] Code the output in the form of Charts & Graphs
