@@ -10,17 +10,26 @@
     padding: 0px;
     position: absolute;
     left: 10px;
+    top: 5px;
+
   }
 
   .search-container {
     align-items: center;
     position: relative;
-    width: 80%;
     left: 120px;
+
   }
 
-  .search-container #search-form {
-    width: 70%;
+  #search-input {
+    width: 50%;
+    height: 40px;
+  }
+
+  .cart-image {
+    position: absolute;
+    top: 5px;
+    right: 10px;
   }
 </style>
 <title>Main Page</title>
@@ -39,6 +48,12 @@
     <input type="text" id="search-input" placeholder="Search...">
     <button type="submit">Search</button>
   </form>
+</div>
+
+<div class="cart-image">
+  <button type="cart" onclick="location.href='/cart'">
+    <img src="static/City_dark.png" width="40" height="40">
+  </button>
 </div>
 
 
