@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/static/Style.css">
 </head>
 <style>
@@ -11,7 +12,7 @@
     position: absolute;
     left: 10px;
     top: 5px;
-
+    cursor: pointer;
   }
 
   .search-container {
@@ -20,16 +21,19 @@
     left: 120px;
 
   }
-
+  .search-container button{
+    cursor: pointer;
+  }
   #search-input {
-    width: 50%;
+    width: 72%;
     height: 40px;
   }
 
-  .cart-image {
+  .cart-image button{
     position: absolute;
     top: 5px;
     right: 10px;
+    cursor: pointer;
   }
 </style>
 <title>Main Page</title>
@@ -52,9 +56,9 @@
 
 <div class="cart-image">
   <button type="cart" onclick="location.href='/cart'">
-    <img src="static/City_dark.png" width="40" height="40">
+    <img src="static/cart.jpg" width="40" height="40">
   </button>
 </div>
-
+<!--ABOVE is from Template-->
 
 </html>

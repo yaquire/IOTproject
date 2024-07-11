@@ -16,7 +16,7 @@ def np():
 
 @app.route("/cart")
 def cart():
-    return render_template("cartPage.html")
+    return render_template("cart.html")
 
 
 @app.route("/template")
