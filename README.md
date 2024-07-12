@@ -11,7 +11,7 @@
 - [x] Create the main landing page of the Website 
 - [x] Create the page for the database of items in the site
 - [ ] Allow for the page to be updated using info from the Thingspeak channel
-#### Code Inside Tracker 
+#### Code Insight Tracker 
 - [x] Create the first files 
 - [x] Create the parts that allow for data to be taken in from the Thingspeak channel
 - [ ] Create the input for the Ultrasound
