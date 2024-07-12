@@ -1,11 +1,23 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template
+import pandas as pd
+import os
+import csv
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
+    # Check if data.csv exists
+    data = []
+    with open("data.csv", mode="r") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            data.append(row)
+
+    # print(data)
+
     return render_template("main.html")
 
 
