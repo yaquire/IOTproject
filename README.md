@@ -30,7 +30,7 @@
 - [ ] Add the code for the buzzer to buzz when it works 
 - [ ] Adds differing buzzes for works & not works 
 
-#### Creat LCD Output (JY)
+#### Creat LCD Output (Yaq)
 - [ ] Create the files & needed modules
 - [ ] Make the input code for the output 
 - [ ] Mold the output to fit in the LCD
