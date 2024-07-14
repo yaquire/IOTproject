@@ -10,7 +10,8 @@ app = Flask(__name__)
 def index():
     # Check if data.csv exists
     data = []
-    with open("data.csv", mode="r") as file:
+    filepath = "Web Server/data.csv"
+    with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
 
         for row in reader:
@@ -18,7 +19,7 @@ def index():
 
     # print(data)
 
-    return render_template("main.html")
+    return render_template("main.html", data=data)
 
 
 @app.route("/np")

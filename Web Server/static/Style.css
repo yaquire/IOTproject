@@ -67,28 +67,38 @@
 #title-Banner img {
   width: 100%;
 }
+
 /* the css for this is pretty messy will fix later or maybe never honestly */
+
 #Card {
   display: flex;
   flex-direction: row;
   gap: 5%;
+ 
 }
 
-.Product {
+#Card {
   position: relative;
   top: 40px;
   left: 10px;
 
-  
+  gap: 5%;
+  background-color: beige;
   width: 23%;
   min-width: 430px;
   padding: 10px 12px;
   border: solid var(--turquise-color);
 }
 
-.Product img {
+.add-cart{
+  position: absolute;
+  top:90%
+}
+
+.Product img{
   cursor: pointer;
   width: 100%;
   max-height: 200px;
   border-radius: 20px;
 }
+
