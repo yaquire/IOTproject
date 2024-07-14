@@ -47,23 +47,24 @@
 
 
 <section class="looping">
-<!-- The below code will be a cart for each product that will be used repeatedly --q<!-- The Loop starts here -->
-{% for row in data %}
-<section id="Card">
-  <div class="Product">
-   
-    <img src= {{row['image-link'] }}>
-    <h5>{{row['Name']}}</h5>
-    <body>
-      {{row['Description']}}
-    </body>
-  </div>
-  <div id="add-cart">
-    <a href="/cart"><img src="static/cart.jpg" height="20px" width="20px"></a>
-  </div>
-</section>
-{% endfor %}
-<!-- Loop ends here -->
+  <!-- The below code will be a cart for each product that will be used repeatedly --q<!-- The Loop starts here -->
+  {% for row in data %}
+  <section id="Card">
+    <div class="Product">
+
+      <img src={{row['image-link'] }}>
+      <h5>{{row['Name']}}</h5>
+
+      <body>
+        {{row['Description']}}
+      </body>
+    </div>
+    <div id="add-cart">
+      <a href="/cart"><img src="static/adding.jpg" height="40px" width="40px"></a>
+    </div>
+  </section>
+  {% endfor %}
+  <!-- Loop ends here -->
 </section>
 
 </html>
