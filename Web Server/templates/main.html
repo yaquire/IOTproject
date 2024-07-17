@@ -70,19 +70,29 @@
           {{row['Description']}}
         </body>
       </div>
-      <form action="">
+      
         <div id="add-cart">
-          <input type="hidden" name='item' value="{{item}}">
-          <input class="btn btn-secondary" type="submit" value="Submit" Add to cart</button>
+          <button id='but' name="addingToCart" value="{{row[Name]}}" onclick="f(this.value)"> 
+            Add to cart</button>
         </div>
-      </form>
+      
     </div>
 
   </section>
   {% endfor %}
   <!-- Loop ends here -->
+   <!-- This is test code from https://www.kodeclik.com/how-to-get-value-of-button-clicked-in-javascript/ -->
+    <!-- Function works when the val != {{row[Name]}}, works when val == any value -->
+    <h2 id="message"></h2>
+    <script>
+    function f(val) {
+      document.getElementById('message').innerHTML = val;
+
+    }
+    </script>
 </div>
 
+<!-- This is test code from freeCodeCamp -->
 
 
 
