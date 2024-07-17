@@ -6,32 +6,30 @@
 
   background-color: lightblue;
   padding-bottom: 5%;
-  align-items: center;
 }
 
 #top-bar {
-  position: relative;
-  width: 95%;
-  min-width: 500px;
-  padding: 10px;
+  display: flex;
+
+  width: 100%;
+  
 }
 
 .logo {
-
-  position: absolute;
-  left: 10px;
+  
+  margin-right: 5%;
   top: 5px;
   cursor: pointer;
 }
 
 .search-container {
-  align-items: center;
-  position: relative;
+  justify-content: center;
+  flex-grow: 2;
   left: 120px;
 }
 
 #search-input {
-  width: 80%;
+  width: 60%;
   height: 40px;
 }
 
@@ -41,48 +39,32 @@
 
 .search-container button {
   cursor: pointer;
-  height: 40px;
+  
 }
 
 .cart-image button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
   cursor: pointer;
 }
-
-
-
-
 
 /* This is from the Main Page */
-#title-Banner {
-  top: 10px;
-  width: 90%;
-  padding: 5px;
-  cursor: pointer;
-  align-self: center;
-}
-
 #title-Banner img {
-  width: 100%;
+  width: 95%;
+  justify-content: center;
 }
 
-/* the css for this is pretty messy will fix later or maybe never honestly */
-
-#Card {
+/* CSS has been fixed */
+/* The bottom is for the items in the store */
+.looping{
   display: flex;
   flex-direction: row;
-  gap: 5%;
- 
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 #Card {
-  position: relative;
-  top: 40px;
-  left: 10px;
+  display: flexbox;
+  margin: 5 5 2% 2%;
 
-  gap: 5%;
   background-color: beige;
   width: 23%;
   min-width: 430px;
@@ -91,8 +73,6 @@
 }
 
 .add-cart{
-  position: absolute;
-  top:90%
 }
 
 .Product img{
