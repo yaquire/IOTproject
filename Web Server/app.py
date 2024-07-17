@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-import pandas as pd
+from flask import Flask, render_template, request, redirect, url_for, session
+# import pandas as pd
 import os
 import csv
 
@@ -18,8 +18,8 @@ def index():
             data.append(row)
 
     # print(data)
-
-    return render_template("main.html", data=data)
+    items = []
+    return render_template("main.html", data=data, item=items)
 
 
 @app.route("/np")
@@ -27,9 +27,13 @@ def np():
     return render_template("productDatabase.html")
 
 
+# meant for adding items to cart
+
+
 @app.route("/cart")
 def cart():
-    return render_template("cart.html")
+    cart_items = session.get("cart", [])
+    return render_template("cart.html", cart_items=cart_items)
 
 
 @app.route("/template")

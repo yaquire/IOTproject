@@ -1,9 +1,18 @@
 <html class="main-page">
 
 
-<section id="top-bar">
+<section id="top-bar" >
 
   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, 
+                   initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+     -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/Style.css">
     <meta charset="UTF-8">
@@ -12,14 +21,14 @@
 
   </head>
 
+
+
+<!-- This is the button to go to the main page -->
   <button class="logo" onclick="location.href='/'">
     <img src='static/Buildings.png' width="100" height="40">
   </button>
 
-</html>
-<html>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/static/Style.css">
+
 
 <!--This was taken from chatGPT-->
 <div class="search-container">
@@ -29,42 +38,63 @@
   </form>
 </div>
 
+<!-- This is for the button to the cart page -->
 <div class="cart-image">
   <button type="cart" onclick="location.href='/cart'">
     <img src="static/cart.jpg" width="40" height="40">
   </button>
 </div>
 </section>
+
 <!--ABOVE is from Template-->
-
-
-<title>Main Page</title>
 <!-- This will have the main banner-->
 
-<div class="box" id="title-Banner">
-  <img src="static/Buildings.png">
+<div style="padding: 10px;" class="box"  id="title-Banner" >
+  <img src="static/Buildings.png" width="95%" height="500px">
 </div>
 
 
-<section class="looping">
-  <!-- The below code will be a cart for each product that will be used repeatedly --q<!-- The Loop starts here -->
+<!-- This is where the items get displayed -->
+<section class="looping" class='container text-center' class="row">
+  <!-- The below code will be a cart for each product that will be used repeatedly -
+   The Loop starts here -->
   {% for row in data %}
   <section id="Card">
-    <div class="Product">
+    <div class="col">
+      <div class="Product">
 
-      <img src={{row['image-link'] }}>
-      <h5>{{row['Name']}}</h5>
+        <img src={{row[ 'image-link' ] }} class="img-thumbnail"  width="400px">
+        <h5>{{row['Name']}}</h5>
 
-      <body>
-        {{row['Description']}}
-      </body>
+        <body>
+          {{row['Description']}}
+        </body>
+      </div>
+      
+        <div id="add-cart">
+          <button id='but' name="addingToCart" value="{{row[Name]}}" onclick="f(this.value)"> 
+            Add to cart</button>
+        </div>
+      
     </div>
-    <div id="add-cart">
-      <a href="/cart"><img src="static/adding.jpg" height="40px" width="40px"></a>
-    </div>
+
   </section>
   {% endfor %}
   <!-- Loop ends here -->
-</section>
+   <!-- This is test code from https://www.kodeclik.com/how-to-get-value-of-button-clicked-in-javascript/ -->
+    <!-- Function works when the val != {{row[Name]}}, works when val == any value -->
+    <h2 id="message"></h2>
+    <script>
+    function f(val) {
+      document.getElementById('message').innerHTML = val;
+
+    }
+    </script>
+</div>
+
+<!-- This is test code from freeCodeCamp -->
+
+
+
 
 </html>

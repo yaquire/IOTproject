@@ -1,45 +1,20 @@
 <!DOCTYPE>
 <html lang="en">
 
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/static/Style.css">
-</head>
-<style>
-  .logo {
-    border-radius: 0px;
-    padding: 0px;
-    position: absolute;
-    left: 10px;
-    top: 5px;
-    cursor: pointer;
-  }
+<section id="top-bar">
 
-  .search-container {
-    align-items: center;
-    position: relative;
-    left: 120px;
-    
-  }
-  .search-container button{
-    cursor: pointer;
-  }
-  #search-input {
-    width: 72%;
-    height: 40px;
-  }
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/Style.css">
+    <meta charset="UTF-8">
 
-  .cart-image button{
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    cursor: pointer;
-  }
-</style>
-<title>Main Page</title>
-<button class="logo" onclick="location.href='/'">
-  <img src='static/Buildings.png' width="100" height="40">
-</button>
+    <title>Home</title>
+
+  </head>
+
+  <button class="logo" onclick="location.href='/'">
+    <img src='static/Buildings.png' width="100" height="40">
+  </button>
 
 </html>
 <html>
@@ -59,7 +34,22 @@
     <img src="static/cart.jpg" width="40" height="40">
   </button>
 </div>
+</section>
+<!--ABOVE is from Template-->
 
-<!--After This is not for all pages-->
+
+<head>
+  <title>Your Cart</title>
+</head>
+
+<body>
+  <h1>Your Cart</h1>
+  <ul>
+    {% for item in cart_items %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+  <a href="{{ url_for('index') }}">Continue Shopping</a>
+</body>
 
 </html>
