@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+
 # import pandas as pd
 import os
 import csv
@@ -30,35 +31,45 @@ def index():
 ### This is a test
 
 
-@app.route('/', methods=['POST'])
+# This works it from chatGPT
+@app.route("/", methods=["POST"])
 def add_to_cart():
-    print("Request method:", request.method)
-    if 'addingToCart' in request.form:
-        buttonValue = request.form['addingToCart']
-        print("Button Value:",buttonValue)
-    return redirect(url_for('index'))
+    # print("Request method:", request.method)
+    if "addingToCart" in request.form:
+        buttonValue = request.form["addingToCart"]
+        # print("Button Value:",buttonValue)
+        writerC = writeCart(buttonValue)
+    return redirect(url_for("index"))
+
+
 ###
 
+
 def writeCart(name):
-    name = name 
-    print(name)
+    name = name
+    # print(name)
+    data = []
     filepath = "Web Server/purchases.csv"
-    with open(filepath, mode="w") as file:
-        writeer = csv.DictWriter(file,name)
+    with open(filepath, mode="r") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            data.append(row)
+    print(data)
+
     return ()
+
 
 @app.route("/np")
 def np():
     return render_template("productDatabase.html")
 
 
-
-
 # meant for adding items to cart
 @app.route("/cart")
 def cart():
-    cart_items = session.get("cart", [])
-    return render_template("cart.html", cart_items=cart_items)
+    return render_template("cart.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
