@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/static/Style.css">
     <meta charset="UTF-8">
 
-    <title>Home</title>
+    <title>Valar Dohaeris</title>
 
   </head>
 
@@ -63,17 +63,22 @@
     <div class="col">
       <div class="Product">
 
-        <img src={{row[ 'image-link' ] }} class="img-thumbnail"  width="400px">
-        <h5>{{row['Name']}}</h5>
-
+        <img src={{row["image-link"] }} class="img-thumbnail"  width="400px">
+        <h4>{{row['Name']}}</h4>
+        <h6>{{row['Price']}}</h6>
         <body>
           {{row['Description']}}
+          <br>
+          <h6>{{row['Subtext']}}</h6>
         </body>
       </div>
       
         <div id="add-cart">
-          <button id='but' name="addingToCart" value="{{row[Name]}}" onclick="f(this.value)"> 
+          <form action=""  name="{{row['Name']}}" method="POST">
+            <!-- <input type="submit" name="addingToCart" value="{{row[Name]}}"> -->
+          <button id='but'  type="submit" name="addingToCart" value="{{row['Name']}}"> 
             Add to cart</button>
+          </form>
         </div>
       
     </div>
@@ -81,15 +86,15 @@
   </section>
   {% endfor %}
   <!-- Loop ends here -->
-   <!-- This is test code from https://www.kodeclik.com/how-to-get-value-of-button-clicked-in-javascript/ -->
-    <!-- Function works when the val != {{row[Name]}}, works when val == any value -->
-    <h2 id="message"></h2>
+  <!-- This is test code from https://www.kodeclik.com/how-to-get-value-of-button-clicked-in-javascript/ -->
+  <!-- Function works when the -->
+    <!-- <h2 id="message"></h2>
     <script>
     function f(val) {
       document.getElementById('message').innerHTML = val;
 
     }
-    </script>
+    </script> -->
 </div>
 
 <!-- This is test code from freeCodeCamp -->
