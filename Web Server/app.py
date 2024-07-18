@@ -6,7 +6,7 @@ import csv
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/" , methods=["get","POST"])
 def index():
     # Check if data.csv exists
     data = []
@@ -17,10 +17,25 @@ def index():
         for row in reader:
             data.append(row)
 
-    # print(data)
-    items = []
-    return render_template("main.html", data=data, item=items)
 
+    if request.method == 'POST':
+        for item in data:
+            #print (item)
+            #print(item["Name"])
+            if  request.form['addingToCart'] == item["Name"]:
+                print('works')
+                namee=item['Name']
+                writeC = writeCart(namee)
+    return render_template("main.html", data=data)
+
+
+def writeCart(name):
+    name = name 
+    print(name)
+    filepath = "Web Server/purchases.csv"
+    with open(filepath, mode="w") as file:
+        writeer = csv.DictWriter(file,name)
+    return ()
 
 @app.route("/np")
 def np():
