@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/static/Style.css">
     <meta charset="UTF-8">
 
-    <title>Home</title>
+    <title>Valar Dohaeris</title>
 
   </head>
 
@@ -68,13 +68,15 @@
         <h6>{{row['Price']}}</h6>
         <body>
           {{row['Description']}}
+          <br>
+          <h6>{{row['Subtext']}}</h6>
         </body>
       </div>
       
         <div id="add-cart">
-          <form action=""  method="POST">
-            <input type="submit" name="addingToCart" value="{{row[Name]}}">
-          <button id='but'  type="submit"> 
+          <form action=""  name="{{row['Name']}}" method="POST">
+            <!-- <input type="submit" name="addingToCart" value="{{row[Name]}}"> -->
+          <button id='but'  type="submit" name="addingToCart" value="{{row['Name']}}"> 
             Add to cart</button>
           </form>
         </div>
