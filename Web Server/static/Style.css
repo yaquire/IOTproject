@@ -4,7 +4,12 @@
   --brown-color: #c7b198;
   --turquise-color: #596e79;
 
-  background-color: lightblue;
+  --lighter-blue: #e7eaf6; 
+  --lightt-Blue:#a2a8d3; 
+  --Dar-Blue: #38598b; 
+  --Darkest-Blue:#113f67; 
+
+  background-color: var(--Darkest-Blue);
   padding-bottom: 5%;
 }
 
@@ -72,8 +77,7 @@
   border: solid var(--turquise-color);
 }
 
-.add-cart{
-}
+
 
 .Product img{
   cursor: pointer;
@@ -82,3 +86,7 @@
   border-radius: 20px;
 }
 
+.addingToCart {
+  display: flex;
+  align-self: flex-end;
+}

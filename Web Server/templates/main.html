@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
 
     <title>Valar Dohaeris</title>
-
+    <link rel="icon" href="static/images/caramel_dance_cat_base_by_applexpie2_d6m2dkt.gif">
   </head>
 
 
@@ -50,7 +50,7 @@
 <!-- This will have the main banner-->
 
 <div style="padding: 10px;" class="box"  id="title-Banner" >
-  <img src="static/Buildings.png" width="95%" height="500px">
+  <img src="static/images/malevolent_shrine_by_pyroknight98_dh0qs44.png" width="95%" height="500px">
 </div>
 
 
@@ -75,8 +75,7 @@
       
         <div id="add-cart">
           <form action=""  name="{{row['Name']}}" method="POST">
-            <!-- <input type="submit" name="addingToCart" value="{{row[Name]}}"> -->
-          <button id='but'  type="submit" name="addingToCart" value="{{row['Name']}}"> 
+         <button id='addingToCart'  type="submit" name="addingToCart" value="{{row['Name']}}"> 
             Add to cart</button>
           </form>
         </div>
@@ -85,21 +84,6 @@
 
   </section>
   {% endfor %}
-  <!-- Loop ends here -->
-  <!-- This is test code from https://www.kodeclik.com/how-to-get-value-of-button-clicked-in-javascript/ -->
-  <!-- Function works when the -->
-    <!-- <h2 id="message"></h2>
-    <script>
-    function f(val) {
-      document.getElementById('message').innerHTML = val;
-
-    }
-    </script> -->
 </div>
-
-<!-- This is test code from freeCodeCamp -->
-
-
-
 
 </html>
