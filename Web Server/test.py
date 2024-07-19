@@ -30,8 +30,6 @@ def writeCart(name):
             writer.writerow(person)
     return ()
 
-
-name = "Inifity Stones"
 swrite = writeCart(name)
 
 
