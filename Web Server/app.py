@@ -57,8 +57,12 @@ def writeCart(name):
         else:
             rangeNo.append('Not in Data')
     # print('RangeNo' , rangeNo)
-
+    # i = index of the item (This is a local var)
+    i = 0
     hasInteger = any(isinstance(x, int) for x in rangeNo)
+    for x in rangeNo:
+        if type(x) == int:
+            i = x
     # print(RED,hasInteger,RESET)
     if hasInteger is False:
         row = {}
@@ -66,6 +70,7 @@ def writeCart(name):
         row["Quantity"] = 1
         data.append(row)
     elif hasInteger is True:
+        print('The index of the item is:', i)
         quant = int(data[i]['Quantity'])
         quant += 1
         data[i]['Quantity'] = quant
@@ -104,20 +109,18 @@ def add_to_cart():
         writerC = writeCart(buttonValue)
     return redirect(url_for("index"))
 
-
-###
-
 # meant for adding items to cart
-@app.route("/cart")
+@app.route("/cart", methods = ['GET'])
 def cart():
-    datas = []
+    data = []
     filepath = "Web Server/purchases.csv"
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
-            datas.append(row)
+            data.append(row)
 
-    return render_template("cart.html", data=datas)
+    print(RED, data,RESET)
+    return render_template("cart.html", data=data)
 
 
 if __name__ == "__main__":

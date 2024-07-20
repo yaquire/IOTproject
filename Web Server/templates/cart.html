@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/Style.css">
     <meta charset="UTF-8">
 
-    <title>Home</title>
+    <title>Cart</title>
 
   </head>
 
@@ -16,8 +16,7 @@
     <img src='static/Buildings.png' width="100" height="40">
   </button>
 
-</html>
-<html>
+
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/static/Style.css">
 
@@ -36,20 +35,37 @@
 </div>
 </section>
 <!--ABOVE is from Template-->
+<style>
+  
+  #purchaseItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    
+    color: darkgoldenrod;
+    background-color: beige;
+    padding: 10px 12px;
+    border: solid var(--turquise-color);
+  }
 
 
-<head>
-  <title>Your Cart</title>
-</head>
+</style>
 
 <body>
   <h1>Your Cart</h1>
-  <ul>
-    {% for item in cart_items %}
-    <li>{{ item }}</li>
+
+    {% for row in data %}
+    <section id="looping">
+    <div id="purchaseItem">
+      
+
+        <h4 class="Name">{{row['Name']}}</h4>
+        <h5 class="Quantity">{{row['Quantity']}}</h5>
+    </div>
+  </section>
     {% endfor %}
-  </ul>
-  <a href="{{ url_for('index') }}">Continue Shopping</a>
+
+  <button href="/">Continue Shopping</button>
 </body>
 
 </html>
