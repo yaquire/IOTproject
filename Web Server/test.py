@@ -3,13 +3,15 @@
 
 import csv
 
-RED = '\033[31m'
-GREEN = '\033[32m'
-YELLOW = '\033[33m'
-BLUE = '\033[34m'
-MAGENTA = '\033[35m'
-CYAN = '\033[36m'
-RESET = '\033[0m'
+from Cython.Compiler.TypeSlots import lenfunc
+
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+MAGENTA = "\033[35m"
+CYAN = "\033[36m"
+RESET = "\033[0m"
 # def choseingItem(data):
 #     for i in range(len(data)):
 #         print(i,':',data[i]['Name'])
@@ -96,36 +98,45 @@ RESET = '\033[0m'
 #     name = choseingItem(atat)
 #     swrite = writeCart(name)
 
-#def priceNTotal():
+# def priceNTotal():
 purchaseData = []
 storeData = []
 
-nameData=[]
-purchasePath = "Web Server/purchases.csv"
+try: purchasePath = "Web Server/purchases.csv"
+except FileNotFoundError:
+    print('Wrong Directory')
+else: purchasePath = "purchases.csv"
+
 with open(purchasePath, mode="r") as file:
     reader = csv.DictReader(file)
     for row in reader:
         purchaseData.append(row)
 
-storePath = "Web Server/data.csv"
+
+try: storePath = "Web Server/data.csv"
+except FileNotFoundError:
+    print('Wrong Dir')
+else: storePath = "data.csv"
+
 with open(storePath, mode="r") as file:
     reader = csv.DictReader(file)
     for row in reader:
         storeData.append(row)
 
 for row in storeData:
-    print(MAGENTA,row,RESET)
+    #print(MAGENTA, row, RESET)
 
-    name = row['Name']
-    number = row['Quantity']
-    price = row['Price']
-    item = {}
-    item[name] = number
-    item[name] = price
+    name = row["Name"]
+    number = row["Quantity"]
+    price = row["Price"]
+
+    for i in range(len(purchaseData)):
+        if purchaseData[i]['Name'] == name:
+            print('Adding Price')
+            purchaseData[i]['Price'] = price
+        else:
+            print('ERROR')
 
 
-print(MAGENTA,row,RESET)
-print('-'*50)
-print(RED,purchaseData,RESET)
-
-
+print("-" * 50)
+print(RED, purchaseData, RESET)

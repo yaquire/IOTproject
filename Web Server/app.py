@@ -34,7 +34,41 @@ def index():
     #             writeC = writeCart(namee)
     return render_template("main.html", data=data)
 
+def addingPrice():
+    purchaseData = []
+    storeData = []
 
+
+    purchasePath = "Web Server/purchases.csv"
+    with open(purchasePath, mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            purchaseData.append(row)
+
+
+    storePath = "Web Server/data.csv"
+
+    with open(storePath, mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            storeData.append(row)
+
+    for row in storeData:
+        # print(MAGENTA, row, RESET)
+
+        name = row["Name"]
+        number = row["Quantity"]
+        price = row["Price"]
+
+        for i in range(len(purchaseData)):
+            if purchaseData[i]['Name'] == name:
+                print('Adding Price')
+                purchaseData[i]['Price'] = price
+            else:
+                print('ERROR')
+
+    print(RED,purchaseData,RESET)
+    return ()
 ### This is a test
 def writeCart(name):
     name = name
@@ -97,6 +131,8 @@ def writeCart(name):
         for row in reader:
             datas.append(row)
     print(MAGENTA + str(datas) + RESET)
+
+    addPrice = addingPrice()
     return ()
 
 # This works it from chatGPT
