@@ -34,106 +34,92 @@ def index():
     #             writeC = writeCart(namee)
     return render_template("main.html", data=data)
 
-def addingPrice():
-    purchaseData = []
-    storeData = []
 
-
-    purchasePath = "Web Server/purchases.csv"
-    with open(purchasePath, mode="r") as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            purchaseData.append(row)
-
-
-    storePath = "Web Server/data.csv"
-
-    with open(storePath, mode="r") as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            storeData.append(row)
-
-    for row in storeData:
-        # print(MAGENTA, row, RESET)
-
-        name = row["Name"]
-        number = row["Quantity"]
-        price = row["Price"]
-
-        for i in range(len(purchaseData)):
-            if purchaseData[i]['Name'] == name:
-                print('Adding Price')
-                purchaseData[i]['Price'] = price
-            else:
-                print('ERROR')
-
-    print(RED,purchaseData,RESET)
-    return ()
 ### This is a test
 def writeCart(name):
-    name = name
-    # print(name)
-    data = []
-    filepath = "Web Server/purchases.csv"
-    with open(filepath, mode="r") as file:
-        reader = csv.DictReader(file)
-        for row in reader:
+        name = name
+        itemData = []
+        filepath = 'Web Server/data.csv'
+        with open(filepath, mode="r") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                row.pop('image-link')
+                row.pop('Quantity')
+                row.pop('Description')
+                row.pop('Subtext')
+                itemData.append(row)
+        file.close()
+        print(RED, itemData, RESET)
+
+        data = []
+        filepath = 'Web Server/buyee.csv'
+        with open(filepath, mode="r") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                data.append(row)
+        file.close()
+        # the below code written by Yaq
+        rangeNo = []
+        number = 0
+        for i in range(len(data)):
+            dictName = data[i]['Name']
+            if name == dictName:
+                # print(i,'In dict')
+                rangeNo.append(i)
+                number = i
+            else:
+                rangeNo.append('Not in Data')
+        # print('RangeNo' , rangeNo)
+        # i = index of the item (This is a local var)
+        i = 0
+        hasInteger = any(isinstance(x, int) for x in rangeNo)
+        for x in rangeNo:
+            if type(x) == int:
+                i = x
+        # print(RED,hasInteger,RESET)
+        if hasInteger is False:
+            row = {}
+            row['Name'] = name
+            row["Quantity"] = 1
             data.append(row)
-
-    rangeNo = []
-    number = 0
-    for i in range(len(data)):
-        dictName = data[i]['Name']
-        if name == dictName:
-            # print(i,'In dict')
-            rangeNo.append(i)
-            number = i
+        elif hasInteger is True:
+            print('The index of the item is:', i)
+            quant = int(data[i]['Quantity'])
+            quant += 1
+            data[i]['Quantity'] = quant
         else:
-            rangeNo.append('Not in Data')
-    # print('RangeNo' , rangeNo)
-    # i = index of the item (This is a local var)
-    i = 0
-    hasInteger = any(isinstance(x, int) for x in rangeNo)
-    for x in rangeNo:
-        if type(x) == int:
-            i = x
-    # print(RED,hasInteger,RESET)
-    if hasInteger is False:
-        row = {}
-        row['Name'] = name
-        row["Quantity"] = 1
-        data.append(row)
-    elif hasInteger is True:
-        print('The index of the item is:', i)
-        quant = int(data[i]['Quantity'])
-        quant += 1
-        data[i]['Quantity'] = quant
-    else:
-        print(RED + 'ERROR' + RESET)
+            print(RED + 'ERROR' + RESET)
 
-    # print('--' * 50)
-    # print(data)
-    with open(filepath, mode="w", newline="") as file:
-        fieldnames = ["Name", "Quantity"]
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        # This is taken from chatGPT
+        indexsData = []
+        indexsItemData = []
+        for i in range(len(data)): indexsData.append(data[i]['Name'])
+        for i in range(len(itemData)): indexsItemData.append(itemData[i]['Name'])
+        matchingIndexforItem_data = [i for i, item in enumerate(indexsItemData) if item in indexsData]
+        # ~~~#
 
-        writer.writeheader()  # Write the header row
+        newData = []
+        for i in range(len(data)):
+            mergeDict = {**itemData[(matchingIndexforItem_data[i])], **data[i]}
+            newData.append(mergeDict)
 
-        for person in data:
-            writer.writerow(person)
+        for row in newData:
+            cost = int(row['Quantity']) * float(row['Price'])
+            row['Cost'] = cost
 
-    ####
-    # print(CYAN + str(data) + RESET)
+        print(MAGENTA, newData, RESET)
 
-    datas = []
-    with open(filepath, mode="r") as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            datas.append(row)
-    print(MAGENTA + str(datas) + RESET)
+        headers = list(newData[0].keys())
+        print(headers)
 
-    addPrice = addingPrice()
-    return ()
+        with open(filepath, mode="w+", newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=headers)
+            writer.writeheader()
+            for row in newData:
+                writer.writerow(row)
+
+        # print(GREEN,data,RESET)
+        return ()
 
 # This works it from chatGPT
 @app.route("/", methods=["POST"])
@@ -149,7 +135,7 @@ def add_to_cart():
 @app.route("/cart", methods = ['GET'])
 def cart():
     data = []
-    filepath = "Web Server/purchases.csv"
+    filepath = 'Web Server/buyee.csv'
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
