@@ -17,55 +17,60 @@
   </button>
 
 
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="/static/Style.css">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/static/Style.css">
 
-<!--This was taken from chatGPT-->
-<div class="search-container">
-  <form id="search-form">
-    <input type="text" id="search-input" placeholder="Search...">
-    <button type="submit">Search</button>
-  </form>
-</div>
+  <!--This was taken from chatGPT-->
+  <div class="search-container">
+    <form id="search-form">
+      <input type="text" id="search-input" placeholder="Search...">
+      <button type="submit">Search</button>
+    </form>
+  </div>
 
-<div class="cart-image">
-  <button type="cart" onclick="location.href='/cart'">
-    <img src="static/cart.jpg" width="40" height="40">
-  </button>
-</div>
+  <div class="cart-image">
+    <button type="cart" onclick="location.href='/cart'">
+      <img src="static/cart.jpg" width="40" height="40">
+    </button>
+  </div>
 </section>
 <!--ABOVE is from Template-->
 <style>
-  
-  #purchaseItem{
+  #purchaseItem {
     display: flex;
     flex-direction: row;
-    justify-content: start;
-    
+    justify-content: space-between;
+
     color: darkgoldenrod;
     background-color: beige;
     padding: 10px 12px;
     border: solid var(--turquise-color);
   }
-
-
+  
 </style>
 
 <body>
   <h1>Your Cart</h1>
-
-    {% for row in data %}
-    <section id="looping">
+  <section id="looping">
     <div id="purchaseItem">
-      
-
-        <h4 class="Name">{{row['Name']}}</h4>
-        <h5 class="Quantity">{{row['Quantity']}}</h5>
-        <h5 class="Price">{{row['Price']}} </h5>
-        
+      <h4 class="Name" >NAME</h4>
+      <h5 class="Quantity" >QUANTITY</h5>
+      <h5 class="Price" >PRICE ($)</h5>
+      <h6 class="Cost" >COST ($)</h6>
     </div>
   </section>
-    {% endfor %}
+  {% for row in data %}
+  <section id="looping">
+    <div id="purchaseItem">
+
+
+      <h4 class="Name" >{{row['Name']}}</h4>
+      <h5 class="Quantity" style="">{{row['Quantity']}}</h5>
+      <h5 class="Price" >${{row['Price']}} </h5>
+      <h6 class="Cost" >${{row['Cost']}}</h6>
+    </div>
+  </section>
+  {% endfor %}
 
   <button href="/">Continue Shopping</button>
 </body>
