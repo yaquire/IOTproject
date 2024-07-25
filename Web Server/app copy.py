@@ -99,7 +99,9 @@ def writeCart(name):
     # ~~~#
 
     newData = []
+    print(matchingIndexforItem_data)
     for i in range(len(data)):
+        print(GREEN, data[i], RESET)
         mergeDict = {**itemData[(matchingIndexforItem_data[i])], **data[i]}
         newData.append(mergeDict)
 
