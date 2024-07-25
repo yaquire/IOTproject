@@ -34,41 +34,7 @@ def index():
     #             writeC = writeCart(namee)
     return render_template("main.html", data=data)
 
-# def addingPrice():
-#     purchaseData = []
-#     storeData = []
-#
-#
-#     purchasePath = "Web Server/purchases.csv"
-#     with open(purchasePath, mode="r") as file:
-#         reader = csv.DictReader(file)
-#         for row in reader:
-#             purchaseData.append(row)
-#
-#
-#     storePath = "Web Server/data.csv"
-#
-#     with open(storePath, mode="r") as file:
-#         reader = csv.DictReader(file)
-#         for row in reader:
-#             storeData.append(row)
-#
-#     for row in storeData:
-#         # print(MAGENTA, row, RESET)
-#
-#         name = row["Name"]
-#         number = row["Quantity"]
-#         price = row["Price"]
-#
-#         for i in range(len(purchaseData)):
-#             if purchaseData[i]['Name'] == name:
-#                 print('Adding Price')
-#                 purchaseData[i]['Price'] = price
-#             else:
-#                 print('ERROR')
-#
-#     print(RED,purchaseData,RESET)
-#     return ()
+
 ### This is a test
 def writeCart(name):
     name = name
@@ -83,7 +49,7 @@ def writeCart(name):
             row.pop('Subtext')
             itemData.append(row)
     file.close()
-    print(RED,itemData,RESET)
+    print(RED, itemData, RESET)
 
     data = []
     filepath = 'Web Server/buyee.csv'
@@ -92,7 +58,7 @@ def writeCart(name):
         for row in reader:
             data.append(row)
     file.close()
-    #the below code written by Yaq
+    # the below code written by Yaq
     rangeNo = []
     number = 0
     for i in range(len(data)):
@@ -124,30 +90,30 @@ def writeCart(name):
     else:
         print(RED + 'ERROR' + RESET)
 
-    #This is taken from chatGPT
+    # This is taken from chatGPT
     indexsData = []
     indexsItemData = []
-    for i in range(len(data)):indexsData.append(data[i]['Name'])
-    for i in range(len(itemData)):indexsItemData.append(itemData[i]['Name'])
-    matchingIndexforItem_data = [i for i,item in enumerate(indexsItemData) if item in indexsData]
-    #~~~#
+    for i in range(len(data)): indexsData.append(data[i]['Name'])
+    for i in range(len(itemData)): indexsItemData.append(itemData[i]['Name'])
+    matchingIndexforItem_data = [i for i, item in enumerate(indexsItemData) if item in indexsData]
+    # ~~~#
 
     newData = []
     for i in range(len(data)):
-        mergeDict = {**itemData[(matchingIndexforItem_data[i])],**data[i]}
+        mergeDict = {**itemData[(matchingIndexforItem_data[i])], **data[i]}
         newData.append(mergeDict)
 
     for row in newData:
         cost = int(row['Quantity']) * float(row['Price'])
         row['Cost'] = cost
 
-    print(MAGENTA,newData,RESET)
+    print(MAGENTA, newData, RESET)
 
     headers = list(newData[0].keys())
     print(headers)
 
     with open(filepath, mode="w+", newline='') as file:
-        writer = csv.DictWriter(file,fieldnames=headers)
+        writer = csv.DictWriter(file, fieldnames=headers)
         writer.writeheader()
         for row in newData:
             writer.writerow(row)
@@ -155,27 +121,93 @@ def writeCart(name):
     # print(GREEN,data,RESET)
     return ()
 
+
 # This works it from chatGPT
 @app.route("/", methods=["POST"])
 def add_to_cart():
     # print("Request method:", request.method)
     if "addingToCart" in request.form:
         buttonValue = request.form["addingToCart"]
-        print("Button Value:",buttonValue)
+        print("Button Value:", buttonValue)
         writerC = writeCart(buttonValue)
     return redirect(url_for("index"))
 
+
+def changeCART(name, change):
+    data = []
+    filepath = 'Web Server/buyee.csv'
+    with open(filepath, mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            data.append(row)
+    file.close()
+
+    for row in data:
+        print(row)
+        if row['Name'] == name:
+            if change == '+':
+                quant = int(row['Quantity'])
+                quant += 1
+                row['Quantity'] = quant
+            elif change == '-':
+                quant = int(row['Quantity'])
+                quant -= 1
+                row['Quantity'] = quant
+
+            print(GREEN, row, RESET)
+            print(RED + 'WORKS' + RESET)
+        else:
+            print(RED + 'ERROR' + RESET)
+
+    j = None
+    for i in range(len(data)):
+        print(GREEN, data, RESET)
+        quant = int(data[i]['Quantity'])
+        if quant == 0: j = i
+    try:
+        del data[j]
+    except TypeError:
+        print('NOTHING TO REMOVE')
+
+    headers = ['Name', 'Price', 'Quantity', 'Cost']
+    with open(filepath, mode="w+", newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=headers)
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
+
+    return ()
+
+
+# this is adding item for CART
+@app.route("/cart", methods=["POST"])
+def plus_item_cart():
+    # print("Request method:", request.method)
+    if "plus-item" in request.form:
+        buttonValue = request.form["plus-item"]
+        print("Button Value:", buttonValue)
+    elif "item-minus" in request.form:
+        buttonValue = request.form["item-minus"]
+        print("Button Value:", buttonValue)
+    # buttonValue is a string
+    type_of_change = buttonValue[-1]
+    name = buttonValue[:-2]
+    print(name + ':' + type_of_change)
+    changeCart = changeCART(name, type_of_change)
+    return redirect(url_for("cart"))
+
+
 # meant for adding items to cart
-@app.route("/cart", methods = ['GET'])
+@app.route("/cart", methods=['GET'])
 def cart():
     data = []
-    filepath = "Web Server/purchases.csv"
+    filepath = 'Web Server/buyee.csv'
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
             data.append(row)
 
-    print(RED, data ,RESET)
+    # print(RED, data, RESET)
     return render_template("cart.html", data=data)
 
 
