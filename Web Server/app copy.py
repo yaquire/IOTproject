@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 
 # import pandas as pd
-import os
+import random
 import csv
 
 RED = '\033[31m'
@@ -191,6 +191,7 @@ def plus_item_cart():
     elif "item-minus" in request.form:
         buttonValue = request.form["item-minus"]
         print("Button Value:", buttonValue)
+
     # buttonValue is a string
     type_of_change = buttonValue[-1]
     name = buttonValue[:-2]
@@ -203,14 +204,37 @@ def plus_item_cart():
 @app.route("/cart", methods=['GET'])
 def cart():
     data = []
+    totalCost = 0
     filepath = 'Web Server/buyee.csv'
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
             data.append(row)
+            totalCost += float(row['Cost'])
 
-    # print(RED, data, RESET)
-    return render_template("cart.html", data=data)
+    return render_template("cart.html", data=data, totalCost=totalCost)
+
+
+@app.route('/checkout')
+def checkout():
+    data = []
+    totalCost = 0
+
+    filepath = 'Web Server/buyee.csv'
+    with open(filepath, mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            data.append(row)
+            totalCost += float(row['Cost'])
+
+    # FOR CHECKOUT
+    if data == []:
+        print('No items, so no chackout')
+    else:
+        randomID = random.randint(10000, 99999)
+        print('CUSTOMER ID:', randomID)
+        # print(RED, data, RESET)
+    return render_template('checkout.html', randomID=randomID, data=data, totalCost=totalCost)
 
 
 if __name__ == "__main__":

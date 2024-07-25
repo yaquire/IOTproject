@@ -72,7 +72,9 @@
       height: 20px;
       align-items: center;
     }
-
+    #totalCost {
+      left: 0px;
+    }
   </style>
 
   <body>
@@ -91,11 +93,11 @@
         <h4 class="Name">{{row['Name']}}</h4>
         <div class="cart_quantity">
           <form action="" name="{{row['Name']}}" method="POST">
-            <button href="" id="plus-item" name="plus-item" type="submit" value="{{row['Name']}} +" class="plus_item" style="             margin-right: 5px">+
+            <button href="" id="plus-item" name="plus-item" type="submit" value="{{row['Name']}} +" class="plus_item" style="                         margin-right: 5px">+
             </button></form>
           <h5 class="Quantity">{{row['Quantity']}}</h5>
           <form action="" name="{{row['Name']}}" method="POST">
-            <button href="" id="item-minus" name="item-minus" type="submit" value="{{row['Name']}} -" class="minus_item" style="             margin-left: 5px">-
+            <button href="" id="item-minus" name="item-minus" type="submit" value="{{row['Name']}} -" class="minus_item" style="                         margin-left: 5px">-
             </button></form>
         </div>
         <h5 class="Price">$ {{row['Price']}}</h5>
@@ -103,8 +105,17 @@
       </div>
     </section>
     {% endfor %}
+    <section id="looping">
+      <div id="purchaseItem">
+        <h3 id='totalCost' style="    justify-content: flex-end">Total Cost: ${{totalCost}}</h3>
+      </div>
+    </section>
 
-    <button href="/">Continue Shopping</button>
+
+
+    <button onclick="location.href='/checkout'">
+      CHECKOUT</button>
+
   </body>
 
 </html>
