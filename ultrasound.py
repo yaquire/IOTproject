@@ -32,7 +32,7 @@ csvfile = "test"
 def write_to_csv(file_path, minute, count):
     filePath = f"{file_path}.csv"
     try:
-        with open(filePath, mode='a', newline='') as file:
+        with open(filePath, mode='w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow([minute, count])
             print("Current working directory:", os.getcwd())
