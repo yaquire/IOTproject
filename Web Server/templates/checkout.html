@@ -1,0 +1,56 @@
+<!DOCTYPE>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/Style.css">
+  </head>
+
+  <title>Main Page</title>
+  <!--ABOVE is from Template-->
+  <style>
+    body {
+      align-self: center;
+    }
+    .box {
+      
+      width: 200px;
+      margin: auto auto;
+      background: black;
+    }
+    #titleCart {
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h3 {
+      margin: 10px auto;
+    }
+    h2 {
+      margin: 10px auto;
+    }
+  </style>
+  <body>
+    <div class="box">
+      <div id="titleCart">
+        <h3>Bag ID</h3>
+        <h2>{{randomID}}</h2>
+      </div>
+    </div>
+    {% for row in data %}
+    <section class="listItems">
+      <h4 class="Name">{{row['Name']}}</h4>
+      <h5 class="Quantity">{{row['Quantity']}}</h5>
+      <h5 class="Price">$ {{row['Price']}}</h5>
+      <h6 class="Cost">$ {{row['Cost']}}</h6>
+    </section>
+    {% endfor %}
+
+    <div class="totalView">
+      <h3>Total Cost:</h3>
+      <h2>$ {{totalCost}}</h2>
+    </div>
+
+  </body>
+</html>

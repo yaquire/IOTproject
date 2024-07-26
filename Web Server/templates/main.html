@@ -1,69 +1,69 @@
 <html class="main-page">
 
 
-<section id="top-bar" >
+  <section id="top-bar">
 
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, 
-                   initial-scale=1" />
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, 
+            initial-scale=1"/>
 
-    <!-- Bootstrap CSS -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
-     -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/Style.css">
-    <meta charset="UTF-8">
+      <!-- Bootstrap CSS -->
+      <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+      -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="/static/Style.css">
+      <meta charset="UTF-8">
 
-    <title>Valar Dohaeris</title>
-    <link rel="icon" href="static/images/caramel_dance_cat_base_by_applexpie2_d6m2dkt.gif">
-  </head>
-
-
-
-<!-- This is the button to go to the main page -->
-  <button class="logo" onclick="location.href='/'">
-    <img src='static/Buildings.png' width="100" height="40">
-  </button>
+      <title>Valar Dohaeris</title>
+      <link rel="icon" href="static/images/caramel_dance_cat_base_by_applexpie2_d6m2dkt.gif">
+    </head>
 
 
 
-<!--This was taken from chatGPT-->
-<div class="search-container">
-  <form id="search-form">
-    <input type="text" id="search-input" placeholder="Search...">
-    <button type="submit">Search</button>
-  </form>
-</div>
-
-<!-- This is for the button to the cart page -->
-<div class="cart-image">
-  <button type="cart" onclick="location.href='/cart'">
-    <img src="static/cart.jpg" width="40" height="40">
-  </button>
-</div>
-</section>
-
-<!--ABOVE is from Template-->
-<!-- This will have the main banner-->
-
-<div style="padding: 10px;" class="box"  id="title-Banner" >
-  <img src="static/images/malevolent_shrine_by_pyroknight98_dh0qs44.png" width="95%" height="500px">
-</div>
+    <!-- This is the button to go to the main page -->
+    <button class="logo" onclick="location.href='/'">
+      <img src='static/Buildings.png' width="100" height="40">
+    </button>
 
 
-<!-- This is where the items get displayed -->
-<section class="looping" class='container text-center' class="row">
+
+    <!--This was taken from chatGPT-->
+    <div class="search-container">
+      <form id="search-form">
+        <input type="text" id="search-input" placeholder="Search...">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <!-- This is for the button to the cart page -->
+    <div class="cart-image">
+      <button type="cart" onclick="location.href='/cart'">
+        <img src="static/cart.jpg" width="40" height="40">
+      </button>
+    </div>
+  </section>
+
+  <!--ABOVE is from Template-->
+  <!-- This will have the main banner-->
+
+  <div style="padding: 10px;" class="box" id="title-Banner">
+    <img src="static/images/malevolent_shrine_by_pyroknight98_dh0qs44.png" width="95%" height="500px">
+  </div>
+
+
+  <!-- This is where the items get displayed -->
+  <section class="looping" class='container text-center' class="row">
   <!-- The below code will be a cart for each product that will be used repeatedly -
-   The Loop starts here -->
+  The Loop starts here -->
   {% for row in data %}
   <section id="Card">
     <div class="col">
       <div class="Product">
 
-        <img src={{row["image-link"] }} class="img-thumbnail"  width="400px">
+        <img src={{row["image-link"] }} class="img-thumbnail" width="400px">
         <h4>{{row['Name']}}</h4>
         <h6>{{row['Price']}}</h6>
         <body>
@@ -72,18 +72,18 @@
           <h6>{{row['Subtext']}}</h6>
         </body>
       </div>
-      
-        <div id="add-cart">
-          <form action=""  name="{{row['Name']}}" method="POST">
-         <button id='addingToCart'  type="submit" name="addingToCart" value="{{row['Name']}}"> 
+
+      <div id="add-cart">
+        <form action="" name="{{row['Name']}}" method="POST">
+          <button id='addingToCart' name="addingToCart" value="{{row['Name']}}"> 
             Add to cart</button>
-          </form>
-        </div>
-      
+        </form>
+      </div>
+
     </div>
 
   </section>
   {% endfor %}
-</div>
+  </div>
 
 </html>
