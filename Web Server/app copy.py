@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 
 # import pandas as pd
-import random
+
 import csv
+import json 
+import random
+import requests
+import time
 
 RED = '\033[31m'
 GREEN = '\033[32m'
@@ -215,6 +219,64 @@ def cart():
     return render_template("cart.html", data=data, totalCost=totalCost)
 
 
+#This is the last step
+def creatingUSERjson(data,randomID):
+    json_string = json.dumps(data,indent=4)
+    json_file_name = str(randomID)+'.json'
+    with open(f'{json_file_name}','w') as json_file:
+        json.dump(data, json_file, indent=4)
+
+    return()
+
+
+def write_ThingSpeak(data):
+    data = data
+    apiKEY = ''
+    channelID =''
+    filepath = 'APIkey.csv'
+    with open(filepath, mode="r") as file:
+        reed = file.readlines()
+        apiKEY = reed[0]
+
+    filepath = 'ChannelID.csv'
+    with open(filepath, mode="r") as file:
+        reed = file.readlines()
+        channelID = reed[0]
+
+    #field 2 ~ Number User 
+    readTS = requests.get(f'https://api.thingspeak.com/channels/{channelID}/fields/2.json?results=1')
+    numPPL = json.loads(readTS.text)
+    
+    number_of_Orders = (numPPL['feeds'][0]['field2'])
+    if number_of_Orders == None: number_of_Orders = 1
+    else: 
+        number_of_Orders= int(number_of_Orders)
+        number_of_Orders+=1
+    #field 4 ~ Total Items Bought (Num)
+    number_items = 0
+    #field 5 ~ Total Bought ($)
+    totalPurchase = 0
+    for row in data:
+        quant = row['Quantity']
+        number_items+=int(quant)
+        cost = row['Cost']
+        totalPurchase+=float(cost)
+
+
+    #print("apiKey: ",apiKEY)
+    send_data = requests.get(f"https://api.thingspeak.com/update?api_key={apiKEY}&field4=%s&field5=%s&field2=%s" %(number_items,totalPurchase,number_of_Orders))
+    time.sleep(20)
+    print(send_data)
+    return()
+
+
+# # this is adding item for CART
+# @app.route("/checkout", methods=["POST"])
+# def last_checkout():
+#     if "DONE" in request.form:
+#         buttonValue = request.form["DONE"]
+#     return redirect(url_for("checkout"))
+
 @app.route('/checkout')
 def checkout():
     data = []
@@ -234,6 +296,8 @@ def checkout():
         randomID = random.randint(10000, 99999)
         print('CUSTOMER ID:', randomID)
         # print(RED, data, RESET)
+        #creatingUSERjsons = creatingUSERjson(data,randomID)
+        writeTS =write_ThingSpeak(data)   
     return render_template('checkout.html', randomID=randomID, data=data, totalCost=totalCost)
 
 

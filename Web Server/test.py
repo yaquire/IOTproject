@@ -2,8 +2,11 @@
 
 
 import csv
+import json 
+import random
+import requests
+import time
 
-from Cython.Compiler.TypeSlots import lenfunc
 
 RED = "\033[31m"
 GREEN = "\033[32m"
@@ -12,131 +15,76 @@ BLUE = "\033[34m"
 MAGENTA = "\033[35m"
 CYAN = "\033[36m"
 RESET = "\033[0m"
-# def choseingItem(data):
-#     for i in range(len(data)):
-#         print(i,':',data[i]['Name'])
-#
-#     chose = int(input('Please Enter Item chosen:'))
-#     name = data[chose]['Name']
-#     #print (name)
-#     print('-'*50)
-#     return name
-#
-# def writeCart(name):
-#     name = name
-#     # print(name)
-#     data = []
-#     filepath = "Web Server/purchases.csv"
-#     with open(filepath, mode="r") as file:
-#         reader = csv.DictReader(file)
-#         for row in reader:
-#             data.append(row)
-#
-#     rangeNo = []
-#     number = 0
-#     for i in range(len(data)):
-#         dictName = data[i]['Name']
-#         if name == dictName:
-#             # print(i,'In dict')
-#             rangeNo.append(i)
-#             number = i
-#         else:
-#             rangeNo.append('Not in Data')
-#     # print('RangeNo' , rangeNo)
-#
-#     i =0
-#     hasInteger = any(isinstance(x, int) for x in rangeNo)
-#     for x in rangeNo:
-#         if type(x) == int:
-#             i = x
-#     # print(RED,hasInteger,RESET)
-#     if hasInteger is False:
-#         row = {}
-#         row['Name'] = name
-#         row["Quantity"] = 1
-#         data.append(row)
-#     elif hasInteger is True:
-#         print('The index of the item is:',i)
-#         quant = int(data[i]['Quantity'])
-#         quant += 1
-#         data[i]['Quantity'] = quant
-#     else:
-#         print(RED + 'ERROR' + RESET)
-#
-#     # print('--' * 50)
-#     # print(data)
-#     with open(filepath, mode="w", newline="") as file:
-#         fieldnames = ["Name", "Quantity"]
-#         writer = csv.DictWriter(file, fieldnames=fieldnames)
-#
-#         writer.writeheader()  # Write the header row
-#
-#         for person in data:
-#             writer.writerow(person)
-#
-#     ####
-#     # print(CYAN + str(data) + RESET)
-#
-#     datas = []
-#     with open(filepath, mode="r") as file:
-#         reader = csv.DictReader(file)
-#         for row in reader:
-#             datas.append(row)
-#     print(MAGENTA + str(datas) + RESET)
-#     return ()
-#
-#
-# #THIS IS FOR THE TEST
-# atat = []
-# filepath = "Web Server/data.csv"
-# with open(filepath, mode="r") as file:
-#     reader = csv.DictReader(file)
-#     for row in reader:
-#         atat.append(row)
-#
-# while True:
-#     name = choseingItem(atat)
-#     swrite = writeCart(name)
 
-# def priceNTotal():
-purchaseData = []
-storeData = []
+def creatingUSERjson(data,randomID):
+    json_string = json.dumps(data,indent=4)
+    json_file_name = str(randomID)+'.json'
+    with open(f'{json_file_name}','w') as json_file:
+        json.dump(data, json_file, indent=4)
 
-try: purchasePath = "Web Server/purchases.csv"
-except FileNotFoundError:
-    print('Wrong Directory')
-else: purchasePath = "purchases.csv"
-
-with open(purchasePath, mode="r") as file:
-    reader = csv.DictReader(file)
-    for row in reader:
-        purchaseData.append(row)
+    return()
 
 
-try: storePath = "Web Server/data.csv"
-except FileNotFoundError:
-    print('Wrong Dir')
-else: storePath = "data.csv"
+def write_ThingSpeak(data):
+    data = data
+    apiKEY = ''
+    channelID =''
+    filepath = 'APIkey.csv'
+    with open(filepath, mode="r") as file:
+        reed = file.readlines()
+        apiKEY = reed[0]
 
-with open(storePath, mode="r") as file:
-    reader = csv.DictReader(file)
-    for row in reader:
-        storeData.append(row)
+    filepath = 'ChannelID.csv'
+    with open(filepath, mode="r") as file:
+        reed = file.readlines()
+        channelID = reed[0]
 
-for row in storeData:
-    #print(MAGENTA, row, RESET)
+    #field 2 ~ Number User 
+    readTS = requests.get(f'https://api.thingspeak.com/channels/{channelID}/fields/2.json?results=1')
+    numPPL = json.loads(readTS.text)
+    
+    number_of_Orders = (numPPL['feeds'][0]['field2'])
+    if number_of_Orders == None: number_of_Orders = 1
+    else: 
+        number_of_Orders= int(number_of_Orders)
+        number_of_Orders+=1
+    #field 4 ~ Total Items Bought (Num)
+    number_items = 0
+    #field 5 ~ Total Bought ($)
+    totalPurchase = 0
+    for row in data:
+        quant = row['Quantity']
+        number_items+=int(quant)
+        cost = row['Cost']
+        totalPurchase+=float(cost)
 
-    name = row["Name"]
-    number = row["Quantity"]
-    price = row["Price"]
 
-    for i in range(len(purchaseData)):
-        if purchaseData[i]['Name'] == name:
-            print('Adding Price')
-            purchaseData[i]['Price'] = price
-        else:
-            print('ERROR')
+    #print("apiKey: ",apiKEY)
+    send_data = requests.get(f"https://api.thingspeak.com/update?api_key={apiKEY}&field4=%s&field5=%s&field2=%s" %(number_items,totalPurchase,number_of_Orders))
+    time.sleep(20)
+    print(send_data)
+    return()
 
+def checkout():
+    data = []
+    totalCost = 0
 
-print("-" * 50)
-print(RED, purchaseData, RESET)
+    filepath = 'Web Server/buyee.csv'
+    with open(filepath, mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            data.append(row)
+            totalCost += float(row['Cost'])
+
+    # FOR CHECKOUT
+    if data == []:
+        print('No items, so no chackout')
+    else:
+        randomID = random.randint(10000, 99999)
+        print('CUSTOMER ID:', randomID)
+        # print(RED, data, RESET)
+        #creatingUSERjsons = creatingUSERjson(data,randomID)
+        writeTS =write_ThingSpeak(data)
+    return ()
+
+run = checkout()
