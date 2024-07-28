@@ -246,7 +246,10 @@ def write_ThingSpeak(data):
     readTS = requests.get(f'https://api.thingspeak.com/channels/{channelID}/fields/2.json?results=1')
     numPPL = json.loads(readTS.text)
 
-    number_of_Orders = (numPPL['feeds'][0]['field2'])
+    try:
+        number_of_Orders = (numPPL['feeds'][0]['field2'])
+    except IndexError:
+        number_of_Orders = None
     if number_of_Orders == None:
         number_of_Orders = 1
     else:
@@ -309,6 +312,9 @@ def checkout():
             creatingUSERjsons = creatingUSERjson(data, randomID)
             writeTS = write_ThingSpeak(data)
 
+            with open(filepath, mode='w') as file:
+                file.writelines('')
+            filepath = 'Web Server/buyee.csv'
             with open(filepath, mode='w') as file:
                 file.writelines('')
             return redirect('/')
