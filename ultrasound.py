@@ -26,7 +26,7 @@ count = 0
 last_detection_time = 0
 detection_cooldown = 2
 current_minute = datetime.now().minute 
-csvfile = "test"
+csvfile = "ultrasound"
 
 # Write the people count to the CSV file
 def write_to_csv(file_path, minute, count):
