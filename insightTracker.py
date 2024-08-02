@@ -112,8 +112,9 @@ def write_to_thingspeak(api_key, channel_id, data):
         # Assuming your data rows contain fields that map directly to ThingSpeak fields
         payload = {
             "field1": row[1],
-            "field2": row[2],
-            "field3": row[3],
+            "field5": row[2],
+            "field6": row[3],
+            "field7": row[4],
             "api_key": api_key
             # Add more fields as needed
         }
