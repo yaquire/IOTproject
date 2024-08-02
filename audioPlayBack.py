@@ -1,3 +1,5 @@
+
+
 import RPi.GPIO as GPIO  # import RPi.GPIO module
 from time import sleep  # used to create delays
 
@@ -84,5 +86,3 @@ try:
 finally:
     PWM.stop()
     GPIO.cleanup()
-=======
-from 
