@@ -17,19 +17,20 @@ def generate_data():
     #Left_InStock = Function()
     while True: 
         # Sample data categories
-        category1 = Amount_of_Sales()
-        category2 = Income_earned()
-        category3 = Left_InStock()
+        category1 = ["-"]
+        category2 = Amount_of_Sales()
+        category3 = Income_earned()
+        category4 = Left_InStock()
         # Generate a timestamp for each entry
         timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         # Add data entry
-        data.append([category1, category2, category3, timestamp])
-    print (data)
-    return data
+        data.append([category1, category2, category3, category4, timestamp])
+        print (data)
+        return data
 
 # Write data to CSV file
 def write_to_csv(file_name, data):
-    headers = ['Amount_of_Sales', 'Income_earned', 'Left_InStock', 'Timestamp']
+    headers = ['Header', 'Amount_of_Sales', 'Income_earned', 'Left_InStock', 'Timestamp']
     file_name = f"{file_name}.csv"
     #Check if file path exists
     if os.path.exists(file_name): 
