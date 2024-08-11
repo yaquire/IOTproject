@@ -10,12 +10,12 @@
   <!--ABOVE is from Template-->
   <style>
     body {
-      align-self: center;
+      text-align: center;
     }
     .box {
-      
+
       width: 200px;
-      margin: auto auto;
+      margin: 30px auto;
       background: black;
     }
     #titleCart {
@@ -24,13 +24,42 @@
       flex-direction: column;
     }
 
-    h3 {
-      margin: 10px auto;
+
+    .top-title {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      background: beige;
+      margin: 0px 40px;
+      padding: 10px 10px;
     }
-    h2 {
-      margin: 10px auto;
+    .items {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      background: beige;
+      margin: 0px 40px;
+      padding: 10px 10px;
+    }
+
+    .page-change {
+      display: flex;
+      justify-content: space-between;
     }
   </style>
+  <section class="page-change">
+    <button class="logo" onclick="location.href='/'">
+      <img src='static/Buildings.png' width="100" height="40">
+    </button>
+
+    <!-- This is for the button to the cart page -->
+    <div class="cart-image">
+      <button type="cart" onclick="location.href='/cart'">
+        <img src="static/cart.jpg" width="40" height="40">
+      </button>
+    </div>
+  </section>
+  </section>
   <body>
     <div class="box">
       <div id="titleCart">
@@ -38,19 +67,31 @@
         <h2>{{randomID}}</h2>
       </div>
     </div>
-    {% for row in data %}
     <section class="listItems">
-      <h4 class="Name">{{row['Name']}}</h4>
-      <h5 class="Quantity">{{row['Quantity']}}</h5>
-      <h5 class="Price">$ {{row['Price']}}</h5>
-      <h6 class="Cost">$ {{row['Cost']}}</h6>
+      <div class="top-title">
+        <h4 class="Name">NAME</h4>
+        <h5 class="Quantity">QUANTITY<h5>
+        <h5 class="Price">PRICE ($)</h5>
+        <h6 class="Cost">COST ($)</h6>
+      </div>
+      <div class="items">
+        {% for row in data %}
+        <h4 class="Name">{{row['Name']}}</h4>
+        <h5 class="Quantity">{{row['Quantity']}}</h5>
+        <h5 class="Price">$ {{row['Price']}}</h5>
+        <h6 class="Cost">$ {{row['Cost']}}</h6>
+        {% endfor %}
+      </div>
     </section>
-    {% endfor %}
 
     <div class="totalView">
       <h3>Total Cost:</h3>
       <h2>$ {{totalCost}}</h2>
     </div>
+
+    <form action="" name="DONE" method="POST">
+      <button href="" id="DONE" name="DONE" type="submit" value="DONE" class="plus_item" style="                                  font-size: 20px;">DONE
+      </button></form>
 
   </body>
 </html>
