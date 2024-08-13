@@ -1,7 +1,7 @@
+import threading
 from flask import Flask, render_template, request, redirect, url_for, session
 
 # import pandas as pd
-
 import csv
 import json
 import random
@@ -324,4 +324,5 @@ def checkout():
 
 
 if __name__ == "__main__":
+    print(RED, 'No of Threads:', threading.active_count(), RESET)
     app.run(debug=True, host="0.0.0.0")
