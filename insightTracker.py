@@ -4,17 +4,18 @@ import requests
 import os
 import json
 import csv
-import RPi.GPIO as GPIO # type: ignore
+import RPi.GPIO as GPIO  # type: ignore
 import time
 from datetime import datetime
+
 # Define the GPIO pins
 TRIG_PIN = 23
 ECHO_PIN = 24
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(TRIG_PIN,GPIO.OUT) #use GPIO4 as Trig
-GPIO.setup(ECHO_PIN,GPIO.IN) #use GPIO17 as Echo
+GPIO.setup(TRIG_PIN, GPIO.OUT)  # use GPIO4 as Trig
+GPIO.setup(ECHO_PIN, GPIO.IN)  # use GPIO17 as Echo
 
 # ChatGPT gave me the values for this color parts & told me how to add colour
 RED = "\033[91m"
@@ -24,9 +25,9 @@ YELLOW = "\033[93m"
 RESET = "\033[0m"
 
 # Variables
-last_detection_time = 0 
+last_detection_time = 0
 detection_cooldown = 2  # 2 seconds cooldown
-current_hour = datetime.now().hour 
+current_hour = datetime.now().hour
 csvfile = "test"
 
 
@@ -88,27 +89,28 @@ def write_to_csv(file_path, hour, count):
     except Exception as e:
         print(f"An error occurred while writing to the CSV file: {e}")
 
+
 def getFromCloud(APIkey):
     resp = requests.get(APIkey)
     resultsFromCloud = json.loads(resp.text)
-    
-def write_to_thingspeak(api_key, channel_id, data):
 
+
+def write_to_thingspeak(api_key, channel_id, data):
     formatedData = []
     needsToReplace = f'\n'
     for i in data:
-        line = i.replace(needsToReplace,'')
+        line = i.replace(needsToReplace, '')
         formatedData.append(line)
     print(formatedData)
     # Removes the \n behind each string
     processed_data = [row.split(',') for row in formatedData]
     # Splits each string into list of fields
     url = f"https://api.thingspeak.com/update?"
-    for index,row in enumerate(processed_data):
+    for index, row in enumerate(processed_data):
         if index == 0 and not row[0].isdigit():
             print("Skipping header row.")
-            continue 
-        # Assuming your data rows contain fields that map directly to ThingSpeak fields
+            continue
+            # Assuming your data rows contain fields that map directly to ThingSpeak fields
         payload = {
             "field1": row[1],
             "field5": row[2],
@@ -123,30 +125,32 @@ def write_to_thingspeak(api_key, channel_id, data):
         else:
             print(RED + f"Failed to write data to ThingSpeak: {response.text}" + RESET)
             print('Response code:', response.status_code)
-        
+
         # Add a delay to comply with ThingSpeak's rate limit (15 seconds per update)
         import time
         time.sleep(15)  # 15-second delay to meet rate limits
 
+
 def ultrasound(distance):
-        # Set TRIG_PIN high for 10 microseconds to trigger the measurement
+    # Set TRIG_PIN high for 10 microseconds to trigger the measurement
     GPIO.output(TRIG_PIN, GPIO.HIGH)
     time.sleep(0.00001)
     GPIO.output(TRIG_PIN, GPIO.LOW)
 
-        # Measure pulse width of the echo
+    # Measure pulse width of the echo
     pulse_start = time.time()
     pulse_end = time.time()
 
     while GPIO.input(ECHO_PIN) == 0:
-        pulse_start = time.time() #capture start of pulse
+        pulse_start = time.time()  # capture start of pulse
     while GPIO.input(ECHO_PIN) == 1:
-        pulse_end = time.time() #capture end of pulse
+        pulse_end = time.time()  # capture end of pulse
 
     # Calculate the distance
     pulse_duration = pulse_end - pulse_start
     distance = pulse_duration * 17150  # Speed of sound is 34300 cm/s (17150 cm/s round trip)
     return round(distance, 2)
+
 
 def PeopleCounter(count):
     try:
@@ -178,8 +182,9 @@ def PeopleCounter(count):
             time.sleep(0.1)  # Wait a bit before the next loop
 
     except KeyboardInterrupt:
-     print("Measurement stopped by user")
-     GPIO.cleanup()
+        print("Measurement stopped by user")
+        GPIO.cleanup()
+
 
 def main():
     APIkey = "APIkey"
@@ -187,16 +192,15 @@ def main():
     count = "count"
     writeAPIkey = checkItem(APIkey)
     actualChannelID = checkItem(ChannelID)
-    PeopleCounter(count) 
+    PeopleCounter(count)
     # Read the CSV file
     csv_data = checkItem(csvfile)
-    print (csv_data)
+    print(csv_data)
     if csv_data:
-
         write_to_thingspeak(writeAPIkey, actualChannelID, csv_data)
 
-    #print(actualChannelID)
-    #print(writeAPIkey)
+    # print(actualChannelID)
+    # print(writeAPIkey)
     # infoFromCloud = getFromCloud(APIkey)
 
 

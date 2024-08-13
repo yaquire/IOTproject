@@ -12,7 +12,6 @@ GREEN = "\033[92m"
 YELLOW = "\033[93m"
 RESET = "\033[0m"
 
-
 # Reads from the RFID
 GPIO.setwarnings(False)
 reader = SimpleMFRC522()
