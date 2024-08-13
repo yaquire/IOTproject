@@ -14,6 +14,10 @@ start_script() {
 start_script insightTracker.py
 echo "Started Insight Tracker"
 
+#Starts insight add on
+start_script InsightAddon.py
+echo "Started insight add on"
+
 #Starts the ultrasound
 start_script ultrasound.py
 echo "started ultrasound"
@@ -21,12 +25,8 @@ echo "started ultrasound"
 #this starts the wensite on the local network
 start_script /Web Server/app.py
 echo "started Website"
-#Turns on LCD
+#Turns on LCD & keypad
 start_script LCDoutout.py
 echo "Start LCD"
-#keypad
-start_script keypad.py
-echo "started keypad"
-#Turn on promo code
-start_script promoCode.py
-echo "start promo"
+
+
