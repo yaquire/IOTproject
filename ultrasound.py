@@ -1,5 +1,5 @@
 import csv
-import RPi.GPIO as GPIO  # type: ignore
+import RPi.GPIO as GPIO # type: ignore
 import time
 import os
 from datetime import datetime
@@ -10,8 +10,8 @@ ECHO_PIN = 27
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(TRIG_PIN, GPIO.OUT)  # GPIO25 as Trig
-GPIO.setup(ECHO_PIN, GPIO.IN)  # GPIO27 as Echo
+GPIO.setup(TRIG_PIN,GPIO.OUT) #GPIO25 as Trig
+GPIO.setup(ECHO_PIN,GPIO.IN) #GPIO27 as Echo
 
 # ChatGPT gave me the values for this color parts & told me how to add colour
 RED = "\033[91m"
@@ -25,37 +25,36 @@ people_count = 0
 count = 0
 last_detection_time = 0
 detection_cooldown = 2
-current_minute = datetime.now().minute
-csvfile = "ultrasound"
+current_minute = datetime.now().minute 
+csvfile = "test"
 
 
 # Write the people count to the CSV file
-def write_to_csv(file_path, minute, count):
+def write_to_csv(file_path, count):
     filePath = f"{file_path}.csv"
     try:
-        with open(filePath, mode='w', newline='') as file:
+        with open(filePath, mode='a', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([minute, count])
+            writer.writerow([count])
             print("Current working directory:", os.getcwd())
-            print(f"Writing to CSV: Minute: {minute}, No_of_People: {count}")
+            print(f"Writing to CSV: No_of_People: {count}")
     except Exception as e:
         print(f"An error occurred while writing to the CSV file: {e}")
-
-
+        
 def ultrasound():
-    # Set TRIG_PIN high for 10 microseconds to trigger the measurement
+        # Set TRIG_PIN high for 10 microseconds to trigger the measurement
     GPIO.output(TRIG_PIN, GPIO.HIGH)
     time.sleep(0.00001)
     GPIO.output(TRIG_PIN, GPIO.LOW)
 
-    # Measure pulse width of the echo
+        # Measure pulse width of the echo
     pulse_start = time.time()
     pulse_end = time.time()
 
     while GPIO.input(ECHO_PIN) == 0:
-        pulse_start = time.time()  # capture start of pulse
+        pulse_start = time.time() #capture start of pulse
     while GPIO.input(ECHO_PIN) == 1:
-        pulse_end = time.time()  # capture end of pulse
+        pulse_end = time.time() #capture end of pulse
 
     # Calculate the distance
     pulse_duration = pulse_end - pulse_start
@@ -64,7 +63,7 @@ def ultrasound():
 
 
 def PeopleCounter():
-    global last_detection_time  # declare last_detection_time as global
+    global last_detection_time #declare last_detection_time as global
     global detection_cooldown  # 2 seconds cooldown
     global count
     global current_minute
@@ -82,12 +81,12 @@ def PeopleCounter():
                     count += 1
                     last_detection_time = current_time
                     print(f"Person detected! Total count: {count}")
-                    # Check if the hour has changed
+                        # Check if the hour has changed
                 new_minute = datetime.now().minute
                 if new_minute != current_minute:
                     people_count = count
                     # Write the count for the past hour to the CSV file
-                    write_to_csv(csvfile, current_minute, people_count)
+                    write_to_csv(csvfile, people_count)
                     # Reset the people count for the new hour
                     people_count = 0
                     count = people_count
@@ -96,10 +95,10 @@ def PeopleCounter():
 
                 time.sleep(0.1)  # Wait a bit before the next loop
     except KeyboardInterrupt:
-        print("Measurement stopped by user")
-        people_count = count
-        write_to_csv(csvfile, current_minute, people_count)
-        GPIO.cleanup()
-
+     print("Measurement stopped by user")
+     people_count = count
+     write_to_csv(csvfile, people_count)             
+     GPIO.cleanup()
 
 PeopleCounter()
+    
