@@ -75,7 +75,7 @@ def PeopleCounter():
                 print(f"Distance: {distance} cm")
             time.sleep(1)
             # Check if the distance is within the range of 5cm to 40cm
-            if 1 <= distance <= 200:
+            if 1 <= distance <= 100:
                 current_time = time.time()
                 if current_time - last_detection_time > detection_cooldown:
                     count += 1

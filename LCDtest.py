@@ -49,66 +49,64 @@ def keypad():
             GPIO.output(COL[i], 1)  # write back default value of 1
 
 
-def items_from_Cart(id):
-    filepath = f'purchases_user/{id}.json'
-    if os.path.exists(filepath): 
-        file_exists = False
-        data = []
-    else:
-        file_exists = True
-        with open(filepath, mode='r') as file:
-            data = json.load(file)
-    
 
+while True:
+    try:
+        LCD = I2C_LCD_driver.lcd()  # instantiate an lcd object, call it LCD
+        sleep(0.5)
+        LCD.backlight(0)  # turn backlight off
+        sleep(0.5)
+        LCD.backlight(1)  # turn backlight on
+        #LCD.lcd_display_string("Address = 0x27", 2, 2)  # write on line 2
+        # starting on 3rd column
+        lcdDisplay  = []
+        id = ''
+        LCD.lcd_display_string('ID:')
+        while True:
+            key_pressed = keypad()
 
-    return data, code
+            if key_pressed:
+                LCD.lcd_clear
+                key_pressed = str(key_pressed)
+                id += key_pressed
+                LCD.lcd_display_string('ID:'+id)
+                sleep(0.3)
+            sleep(0.1)
+            if len(id) == 5:
 
-
-try: 
-    LCD = I2C_LCD_driver.lcd()  # instantiate an lcd object, call it LCD
-    sleep(0.5)
-    LCD.backlight(0)  # turn backlight off
-    sleep(0.5)
-    LCD.backlight(1)  # turn backlight on
-    #LCD.lcd_display_string("Address = 0x27", 2, 2)  # write on line 2
-    # starting on 3rd column
-    lcdDisplay  = []
-    id = ''
-
-    while True: 
-        key_pressed = keypad()
-        
-        if key_pressed: 
-            LCD.lcd_clear 
-            key_pressed = str(key_pressed)
-            id += key_pressed
-            LCD.lcd_display_string('ID: '+id)
-            sleep(0.3)
-        sleep(0.1)
-        if len(id) == 5:
-            data,file_exists = items_from_Cart(id)
-            if file_exists == False:
-                LCD.lcd_clear()
-                LCD.lcd_display_string("ID not FOUND")
-                sleep(1)
-            else:
-                LCD.lcd_clear()
-                total_cost = 0
-                for item in data:
-                    name  = item['Name']
-                    Quantity = item['Quantity']
-                    price = item['Price']
-                    Cost = item['Cost']
-                    total_cost += float(Cost)
-
+                filepath = f'purchases_user/{id}.json'
+                if not os.path.exists(filepath):
+                    file_exists = False
                     LCD.lcd_clear()
-                    LCD.lcd_display_string(f'{name}~{Quantity}~Cost:{Cost}~',1)
-                    LCD.lcd_display_string(f'Total Price: {total_cost}',2)
-                    sleep(5)
+                    LCD.lcd_display_string("ID not FOUND")
+                    sleep(1)
+                    break
+                else:
+                    file_exists = True
+                    with open(filepath, mode='r') as file:
+                     data = json.load(file)
+                    LCD.lcd_clear()
+                    total_cost = 0
+                    for item in data:
+                        name  = item['Name']
+                        Quantity = item['Quantity']
+                        price = item['Price']
+                        Cost = item['Cost']
+                        total_cost += float(Cost)
 
+                        LCD.lcd_clear()
+                        LCD.lcd_display_string(f'{name}',1)
+                        LCD.lcd_display_string(f'Number Items: {Quantity}',2)
+                        sleep(3)
+                    LCD.lcd_clear()
+                    LCD.lcd_display_string(f'TOTAL PRICE',1)
+                    LCD.lcd_display_string(f'${total_cost}',2)
+                    sleep(3)
+                    break
 
-except KeyboardInterrupt:
-    print('Input ended')
-finally:
-    LCD.lcd_clear()
-    LCD.lcd_display_string("!DONE!")
+    except KeyboardInterrupt:
+        break
+        print('Input ended')
+    finally:
+        LCD.lcd_clear()
+        LCD.lcd_display_string("!DONE!")
