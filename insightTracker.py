@@ -6,7 +6,7 @@ import json
 import csv
 import RPi.GPIO as GPIO # type: ignore
 import time
-from datetime import datetime
+import datetime
 
 # Define the GPIO pins
 TRIG_PIN = 25
@@ -30,7 +30,7 @@ people_count = 0
 count = 0
 last_detection_time = 0
 detection_cooldown = 2
-current_minute = datetime.now().minute 
+current_minute = datetime.datetime.now().minute 
 feeds = 0
 # This piece of code runs @ the start when the API key has not been added
 # Here the item is the the same as the item from the chunk of code below

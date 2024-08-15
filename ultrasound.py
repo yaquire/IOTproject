@@ -26,17 +26,20 @@ count = 0
 last_detection_time = 0
 detection_cooldown = 2
 current_minute = datetime.now().minute 
-csvfile = "ultrasound"
+csvfile = "test"
+
 
 # Write the people count to the CSV file
-def write_to_csv(file_path, minute, count):
+def write_to_csv(file_path, count):
     filePath = f"{file_path}.csv"
+    headers = ['Header', 'Number of People', 'No of Orders', 'Timestamp']
     try:
         with open(filePath, mode='w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([minute, count])
+            writer.writerow(headers)
+            writer.writerow([count])
             print("Current working directory:", os.getcwd())
-            print(f"Writing to CSV: Minute: {minute}, No_of_People: {count}")
+            print(f"Writing to CSV: No_of_People: {count}")
     except Exception as e:
         print(f"An error occurred while writing to the CSV file: {e}")
         
@@ -85,7 +88,7 @@ def PeopleCounter():
                 if new_minute != current_minute:
                     people_count = count
                     # Write the count for the past hour to the CSV file
-                    write_to_csv(csvfile, current_minute, people_count)
+                    write_to_csv(csvfile, people_count)
                     # Reset the people count for the new hour
                     people_count = 0
                     count = people_count
