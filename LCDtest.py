@@ -7,6 +7,28 @@ import RPi.GPIO as GPIO  # import RPi.GPIO module
 GPIO.setmode(GPIO.BCM)  # choose BCM mode
 GPIO.setwarnings(False)
 
+GPIO.setup(18, GPIO.OUT)  # Set GPIO 18 as output
+PWM = GPIO.PWM(18, 100)  # Set 100Hz PWM output at GPIO 18
+
+
+def payment_success():
+    # Success tune: short ascending tones
+    for freq in [500, 1000, 1500]:
+        PWM.ChangeFrequency(freq)  # Change frequency to the desired tone
+        PWM.start(50)  # Start PWM with 50% duty cycle
+        sleep(0.2)  # Delay for 0.2 seconds
+        PWM.stop()  # Stop the PWM signal
+        sleep(0.1)  # Short delay between tones
+
+def payment_failure():
+    # Failure tune: descending tones
+    for freq in [1500, 1000, 500]:
+        PWM.ChangeFrequency(freq)  # Change frequency to the desired tone
+        PWM.start(50)  # Start PWM with 50% duty cycle
+        sleep(0.4)  # Delay for 0.4 seconds
+        PWM.stop()  # Stop the PWM signal
+        sleep(0.1)  # Short delay between tones
+
 
 def buzzerSounds():
     GPIO.setup(18, GPIO.OUT)  # set GPIO 18 as output
@@ -18,6 +40,7 @@ def buzzerSounds():
             PWM.start(i)
             sleep(2)
     return
+
 
 
 # LCD prins from LEFT->Right
@@ -77,6 +100,9 @@ while True:
                 filepath = f'purchases_user/{id}.json'
                 if not os.path.exists(filepath):
                     file_exists = False
+
+                    payment_failure()
+
                     LCD.lcd_clear()
                     LCD.lcd_display_string("ID not FOUND")
                     sleep(1)
@@ -93,6 +119,8 @@ while True:
                         price = item['Price']
                         Cost = item['Cost']
                         total_cost += float(Cost)
+
+                        payment_success()
 
                         LCD.lcd_clear()
                         LCD.lcd_display_string(f'{name}',1)

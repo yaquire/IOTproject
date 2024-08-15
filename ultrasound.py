@@ -32,9 +32,12 @@ csvfile = "test"
 # Write the people count to the CSV file
 def write_to_csv(file_path, count):
     filePath = f"{file_path}.csv"
+    headers = ['Header', 'Number of People', 'No of Orders', 'Timestamp']
     try:
         with open(filePath, mode='a', newline='') as file:
             writer = csv.writer(file)
+            writer.writerow(headers)
+
             writer.writerow([count])
             print("Current working directory:", os.getcwd())
             print(f"Writing to CSV: No_of_People: {count}")

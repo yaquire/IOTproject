@@ -1,8 +1,10 @@
+
 import csv
 import datetime
 import os
 import time
 import requests
+
 
 # Replace these with your channel ID and API key
 CHANNEL_ID = '2551972'
@@ -23,7 +25,7 @@ def Total_People():
     people = 0
     for feed in feeds:
         try:
-            value = float(feed['field1'])
+            value = int(feed['field1'])
             people += value
         except (ValueError, TypeError):
             print(f"Skipping invalid entry: {feed['field1']}")
@@ -33,7 +35,7 @@ def Total_Orders():
     orders = 0
     for feed in feeds:
         try:
-            value = float(feed['field2'])
+            value = int(feed['field2'])
             orders += value
         except (ValueError, TypeError):
             print(f"Skipping invalid entry: {feed['field2']}")
@@ -41,10 +43,10 @@ def Total_Orders():
 # Function to generate example data
 def generate_data():
 
-    while True: 
+    while True:  
         # Sample data categories
         data = []
-        category1 = ('')
+        category1 = ('-')
         category2 = Total_People()
         category3 = Total_Orders()
         # Generate a timestamp for each entry
@@ -98,4 +100,5 @@ data = generate_data()
 file_name = os.path.join(os.getcwd(), 'IOTproject/test')
 append_data_every_minute(file_name)
 print(os.getcwd())
+
 print(f"Data written to {file_name}")
