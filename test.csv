@@ -1,6 +1,10 @@
-Hour,No_of_People,20,30
-2,12,21,25
-3,13,34,13
-4,14,21,17
-5,15,56,20
-6,16,45,29
+Header,Number of People,No of Orders,Timestamp
+0,,,
+5,,,
+2,,,
+3,,,
+1,,,
+1,,,
+1,,,
+22
+2

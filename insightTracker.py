@@ -4,8 +4,9 @@ import requests
 import os
 import json
 import csv
-import RPi.GPIO as GPIO # type: ignore
+#import RPi.GPIO as GPIO # type: ignore
 import time
+
 import datetime
 
 # Define the GPIO pins
@@ -17,6 +18,12 @@ GPIO.setwarnings(False)
 GPIO.setup(TRIG_PIN,GPIO.OUT) #GPIO25 as Trig
 GPIO.setup(ECHO_PIN,GPIO.IN) #GPIO27 as Echo
 
+from datetime import datetime
+
+
+
+
+
 # ChatGPT gave me the values for this color parts & told me how to add colour
 RED = "\033[91m"
 BLUE = "\033[94m"
@@ -25,6 +32,7 @@ YELLOW = "\033[93m"
 RESET = "\033[0m"
 
 # Variables
+nch
 csvfile = os.path.join(os.getcwd(), 'IOTproject/test')
 people_count = 0
 count = 0
@@ -32,6 +40,11 @@ last_detection_time = 0
 detection_cooldown = 2
 current_minute = datetime.datetime.now().minute 
 feeds = 0
+
+csvfile = 'test'
+
+
+
 # This piece of code runs @ the start when the API key has not been added
 # Here the item is the the same as the item from the chunk of code below
 def gettingItemFromUser(item):
@@ -78,6 +91,7 @@ def checkItem(item):
             writingFile = file.writelines(itemSubstance)
         file.close()
     return itemSubstance
+
 
 def getFromCloud(APIkey):
     resp = requests.get(APIkey)
@@ -128,6 +142,7 @@ def write_to_thingspeak(api_key, channel_id, data):
         # Add a delay to comply with ThingSpeak's rate limit (15 seconds per update)
         import time
         time.sleep(15)  # 15-second delay to meet rate limits
+
 
 def Total_People():
     people = 0
@@ -239,7 +254,7 @@ def PeopleCounter():
      GPIO.cleanup()
      return count
 
-def main():
+
     writeAPIkey = checkItem(os.path.join(os.getcwd(), 'IOTproject/APIkey'))
     actualChannelID = checkItem(os.path.join(os.getcwd(), 'IOTproject/ChannelID'))
     data = get_thingspeak_data()
@@ -258,6 +273,7 @@ def main():
     print(os.getcwd())
     print(f"Data written to {csvfile}")
     time.sleep(0.1)  # Delay for 0.1s
+
     # Read the CSV file
     csv_data = checkItem(csvfile)
     print (csv_data)
