@@ -1,3 +1,4 @@
+
 import csv
 import datetime
 import os
@@ -42,7 +43,7 @@ def Total_Orders():
 # Function to generate example data
 def generate_data():
 
-    while True: 
+    while True:  
         # Sample data categories
         data = []
         category1 = ('-')
@@ -99,4 +100,5 @@ data = generate_data()
 file_name = os.path.join(os.getcwd(), 'IOTproject/test')
 append_data_every_minute(file_name)
 print(os.getcwd())
+
 print(f"Data written to {file_name}")

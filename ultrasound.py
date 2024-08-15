@@ -34,9 +34,10 @@ def write_to_csv(file_path, count):
     filePath = f"{file_path}.csv"
     headers = ['Header', 'Number of People', 'No of Orders', 'Timestamp']
     try:
-        with open(filePath, mode='w', newline='') as file:
+        with open(filePath, mode='a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(headers)
+
             writer.writerow([count])
             print("Current working directory:", os.getcwd())
             print(f"Writing to CSV: No_of_People: {count}")
@@ -77,7 +78,7 @@ def PeopleCounter():
                 print(f"Distance: {distance} cm")
             time.sleep(1)
             # Check if the distance is within the range of 5cm to 40cm
-            if 1 <= distance <= 200:
+            if 1 <= distance <= 100:
                 current_time = time.time()
                 if current_time - last_detection_time > detection_cooldown:
                     count += 1
@@ -99,7 +100,7 @@ def PeopleCounter():
     except KeyboardInterrupt:
      print("Measurement stopped by user")
      people_count = count
-     write_to_csv(csvfile, current_minute, people_count)             
+     write_to_csv(csvfile, people_count)             
      GPIO.cleanup()
 
 PeopleCounter()

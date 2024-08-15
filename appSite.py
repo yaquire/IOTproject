@@ -22,7 +22,7 @@ app = Flask(__name__)
 def index():
     # Check if data.csv exists
     data = []
-    filepath = "Web Server/data.csv"
+    filepath = "data.csv"
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
 
@@ -43,7 +43,7 @@ def index():
 def writeCart(name):
     name = name
     itemData = []
-    filepath = 'Web Server/data.csv'
+    filepath = 'data.csv'
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -56,7 +56,7 @@ def writeCart(name):
     print(RED, itemData, RESET)
 
     data = []
-    filepath = 'Web Server/buyee.csv'
+    filepath = 'buyee.csv'
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -141,7 +141,7 @@ def add_to_cart():
 
 def changeCART(name, change):
     data = []
-    filepath = 'Web Server/buyee.csv'
+    filepath = 'buyee.csv'
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -209,7 +209,7 @@ def plus_item_cart():
 def cart():
     data = []
     totalCost = 0
-    filepath = 'Web Server/buyee.csv'
+    filepath = 'buyee.csv'
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -281,7 +281,7 @@ def checkout():
     data = []
     totalCost = 0
 
-    filepath = 'Web Server/buyee.csv'
+    filepath = 'buyee.csv'
     with open(filepath, mode="r") as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -314,7 +314,7 @@ def checkout():
 
             with open(filepath, mode='w') as file:
                 file.writelines('')
-            filepath = 'Web Server/buyee.csv'
+            filepath = 'buyee.csv'
             with open(filepath, mode='w') as file:
                 file.writelines('')
             return redirect('/')
